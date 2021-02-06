@@ -10,9 +10,9 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" novalidate>
             @csrf
 
             <!-- Email Address -->
@@ -20,6 +20,7 @@
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                <x-pesan-validasi-satuan name="email"/>
             </div>
 
             <!-- Password -->
@@ -30,7 +31,8 @@
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
-            </div>
+                                <x-pesan-validasi-satuan name="password"/>
+                            </div>
 
             <!-- Remember Me -->
             <div class="block mt-4">
@@ -38,6 +40,12 @@
                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
+            </div>
+
+            <div class="block mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ url('register') }}">
+                    {{ __('Belum punya akun?') }}
+                </a>
             </div>
 
             <div class="flex items-center justify-end mt-4">
