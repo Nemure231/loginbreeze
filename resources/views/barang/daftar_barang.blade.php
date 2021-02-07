@@ -29,23 +29,33 @@
                 </tr>
               </thead>
               <tbody class="text-sm font-normal text-gray-700">
+                @foreach ($barang as $db)
+                    
+                
                 <tr class="hover:bg-gray-100 border-b border-gray-200 py-10">
-                  <td class="px-4 py-4">SUsu</td>
-                  <td class="px-4 py-4">mm</td>
-                  <td class="px-4 py-4">Adam</td>
-                  <td class="px-4 py-4">4444</td>
+                  <td class="px-4 py-4">{{$db->nama_barang}}</td>
+                  <td class="px-4 py-4">{{$db->merek_id}}</td>
+                  <td class="px-4 py-4">{{$db->satuan_id}}</td>
+                  <td class="px-4 py-4">{{$db->harga_barang}}</td>
                   <td class="px-4 py-4">
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEdit">
+                    {{-- data-bs-toggle="modal" data-bs-target="#modalEdit" 
+                    
+                    data-bs-toggle="modal" data-bs-target="#modalHapus"
+                    
+                    --}}
+                    <button type="button"  id="tombolEdit" class="btn btn-warning" > 
                       Edit
                     </button>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapus">
+                    <button type="button" id="tombolHapus" class="btn btn-danger">
                       Hapus
                     </button>
                   </td>
 
                 </tr>
+                @endforeach
               </tbody>
             </table>
+            
 
            <!-- Modal Edit-->
             <div class="modal fade" id="modalEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -55,7 +65,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Edit</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body" id="coba3">
                     ...
                   </div>
                   <div class="modal-footer">
@@ -65,6 +75,7 @@
                 </div>
               </div>
             </div>
+
 
             <!-- Modal Hapus-->
             <div class="modal fade" id="modalHapus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -84,6 +95,49 @@
                 </div>
               </div>
             </div>
+
+
+
+            <script>
+              
+              document.getElementById('tombolEdit').addEventListener("click", function(e){
+
+                var tampilModalEdit = new bootstrap.Modal(document.getElementById('modalEdit'));
+
+                tampilModalEdit.show();
+
+              });
+
+                  var e1ModalEdit = document.getElementById('modalEdit');
+                  e1ModalEdit.addEventListener('shown.bs.modal', function (e) {
+
+                    document.getElementById('coba3').innerHTML = "Johnny Bravo";
+                  });
+
+             
+                  /////////////////////Modal Hapus/////////////////////////////
+
+                  document.getElementById('tombolHapus').addEventListener("click", function(e){
+
+                  var tampilModalHapus = new bootstrap.Modal(document.getElementById('modalHapus'));
+
+                  tampilModalHapus.show();
+
+                  });
+
+
+                  var e1ModalHapus = document.getElementById('modalHapus');
+
+                
+                    e1ModalHapus.addEventListener('shown.bs.modal', function (e) {
+
+                    document.getElementById('coba3').innerHTML = "Johnny Silverhand";
+                    });
+                  
+
+            </script>
+
+            
             
             
           </div>

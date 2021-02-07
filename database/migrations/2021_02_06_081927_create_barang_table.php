@@ -21,6 +21,9 @@ class CreateBarangTable extends Migration
             $table->double('harga_barang', 8, 2);
             $table->timestamps();
         });
+
+    
+
     }
 
     /**
@@ -30,6 +33,6 @@ class CreateBarangTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barang');
+       Schema::dropIfExists('barang');
     }
 }
