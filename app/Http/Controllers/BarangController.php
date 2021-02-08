@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Model_barang;
+use App\Models\Model_satuan;
+use App\Models\Model_merek;
 
 class BarangController extends Controller
 {
@@ -14,10 +16,21 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barang =  Model_barang::all();
+        $barang =  Model_barang::select('id_barang', 'nama_barang', 'satuan_id', 'merek_id', 'harga_barang')
+                                ->get();
+        $satuan =  Model_satuan::select('id_satuan', 'nama_satuan')
+                                ->get(); 
+        $merek =  Model_merek::select('id_merek', 'nama_merek')
+                                ->get();
+
+        //dd($merek);
+
         return view('barang/daftar_barang',
-            ['barang' => $barang]
+            ['barang' => $barang, 'merek' => $merek, 'satuan' => $satuan]
+            
         );
+
+
     }
 
     /**
