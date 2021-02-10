@@ -6,6 +6,23 @@
 // 	}
 // });
 
+
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
+  } else {
+    document.addEventListener('DOMContentLoaded', fn);
+  }
+}
+
+
+/////////////
+
+ready(function() { 
+  
+  
+
+
 document.getElementById('tombolTambah').addEventListener('click', function(){
   new bootstrap.Modal(document.getElementById('modalTambah')).show();
 });
@@ -22,14 +39,26 @@ Array.prototype.forEach.call(tombolEdit, function(element) {
     var e1ModalEdit = document.getElementById('modalEdit');
     e1ModalEdit.addEventListener('shown.bs.modal', function (e) {
 
-      document.getElementById('e_nama_barang').value = element.dataset.nama_barang;
+      // document.getElementById('e_nama_barang').value = element.dataset.nama_barang;
+      document.getElementById('e_nama_barang').setAttribute("value", element.dataset.nama_barang);
       document.getElementById('e_harga_barang').value = element.dataset.harga_barang;
       document.getElementById('e_merek_id').value = element.dataset.merek_id;
       document.getElementById('e_satuan_id').value = element.dataset.satuan_id;
-      document.getElementById('form_edit').setAttribute("action", "/barang/" + element.dataset.id_barang);
+      document.getElementById('form_edit').setAttribute("action", "/edit_barang/" + element.dataset.id_barang);
+
+      var id_barang = element.dataset.id_barang;
+      var merek_id = element.dataset.merek_id;
+      var satuan_id = element.dataset.satuan_id;
+      localStorage.setItem("simpan_id_barang", id_barang);
+      localStorage.setItem("simpan_merek_id", merek_id);
+      localStorage.setItem("simpan_satuan_id", satuan_id);
+    
 
     });
   });
+
+
+
 });
 
 
@@ -52,14 +81,38 @@ Array.prototype.forEach.call(tombolHapus, function(element) {
 });
 
 
+var tambah = document.getElementById('pesan_validasi_barang').innerHTML;
+var edit = document.getElementById('pesan_validasi_edit_barang').innerHTML;
 
+// tamba = (tambah.trim) ? htmlstring.trim() : tambah.replace(/^\s+/,'');
+// edi = (edit.trim) ? htmlstring.trim() : edit.replace(/^\s+/,'');
 
-var meh = document.getElementById('pesan_validasi_barang').innerHTML
-
-if(meh){
+if(tambah != '0    '){
   new bootstrap.Modal(document.getElementById('modalTambah')).show();
 
+} 
+
+if(edit != '0    '){
+  new bootstrap.Modal(document.getElementById('modalEdit')).show();
 }
+
+
+var myModalEl = document.getElementById('modalEdit');
+var id_barang = localStorage.getItem("simpan_id_barang");
+var satuan = localStorage.getItem("simpan_satuan_id");
+var merek = localStorage.getItem("simpan_merek_id");
+myModalEl.addEventListener('shown.bs.modal', function (event) {
+
+document.getElementById('form_edit').setAttribute("action", "/edit_barang/" + id_barang);
+document.getElementById('e_satuan_id').value = satuan;
+document.getElementById('e_merek_id').value = merek;
+
+
+});
+});
+
+
+
 
 
 // //////////////////////MODAL TAILWIND///////////////////////////////

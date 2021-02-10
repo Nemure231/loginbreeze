@@ -21,9 +21,13 @@
               Tambah Barang
             </button>
 
-            
+            @if (session('pesan_barang'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{session('pesan_barang')}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
 
-            
 
             <table class="table-auto border-collapse w-full">
               <thead>
@@ -64,7 +68,7 @@
             </table>
 
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <div class="invisible">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -72,7 +76,28 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif --}}
+            
+            
+            
+            <div class="invisible" id="pesan_validasi_barang">0 @error('harga_barang'){{$message}}@enderror @error('nama_barang'){{$message}}@enderror @error('satuan_id'){{$message}}@enderror @error('merek_id'){{$message}}@enderror</div>
+
+            <div class="invisible" id="pesan_validasi_edit_barang">0 @error('e_harga_barang'){{$message}}@enderror @error('e_nama_barang'){{$message}}@enderror @error('e_satuan_id'){{$message}}@enderror @error('e_merek_id'){{$message}}@enderror</div>
+
+
+              {{-- @if ($errors->any())
+              <div class="invisible">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li id="pesan_validasi_edit_barang">{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif --}}
+
+
+
+          
 
 
             {{-- Modal Tambah --}}
@@ -93,7 +118,7 @@
                       <div class="row">
                         <div class="col-lg-6 mb-3">
                           <label>Nama Barang</label>
-                            <input type="text" class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang" name="nama_barang">
+                            <input type="text" value="{{old('nama_barang')}}" class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang" name="nama_barang">
                             <div class="invalid-feedback">
                              
                               @error('nama_barang')
@@ -108,7 +133,7 @@
                         </div>
                         <div class="col-lg-6 mb-3">
                           <label>Harga Barang</label>
-                            <input type="text" class="form-control @error('harga_barang') is-invalid @enderror" id="harga_barang" name="harga_barang">
+                            <input type="text" value="{{old('harga_barang')}}" class="form-control @error('harga_barang') is-invalid @enderror" id="harga_barang" name="harga_barang">
                             <div class="invalid-feedback">
                              
                               @error('harga_barang')
@@ -125,12 +150,10 @@
                         <div class="col-lg-6 mb-3">
                           <label>Pilih Satuan</label>
                             <select class="form-select @error('satuan_id') is-invalid @enderror" id="satuan_id" name="satuan_id" aria-label="Floating label select example">
-                              <option selected value=""></option>
+                              <option selected value="">--Pilih--</option>
 
-                              @foreach ($satuan as $s)
-
-                              <option value="{{$s['id_satuan']}}">{{$s['nama_satuan']}}</option>
-
+                              @foreach($satuan as $s)
+                              <option value={{$s['id_satuan']}} {{(old('satuan_id') == $s['id_satuan']?'selected':'')}} >{{$s['nama_satuan']}}</option>
                               @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -150,12 +173,12 @@
                         <div class="col-lg-6 mb-3">
                          <label>Pilih Merek</label>
                             <select class="form-select @error('merek_id') is-invalid @enderror" id="merek_id" name="merek_id" aria-label="Floating label select example">
-                              <option selected value=""></option>
-                              @foreach ($merek as $m)
+                              <option selected value="">--Pilih--</option>
 
-                              <option value="{{$m['id_merek']}}">{{$m['nama_merek']}}</option>
-
+                              @foreach($merek as $m)
+                              <option value={{$m['id_merek']}} {{(old('merek_id') == $m['id_merek']?'selected':'')}} >{{$m['nama_merek']}}</option>
                               @endforeach
+                              
                             </select>
 
                             <div class="invalid-feedback">
@@ -198,32 +221,47 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
+                  <form method="post" id="form_edit" action="/edit/barang/{{old('id_barang')}}">
+                    @method('put')
+                    @csrf
                   <div class="modal-body" id="modalBodyEdit">
 
-                    <form method="post" id="form_edit">
-                      @method('put')
-                      @csrf
+                    
                       <div class="row">
                         <div class="col-lg-6">
                           <label>Nama Barang</label>
-                            <input type="text" class="form-control" id="e_nama_barang" placeholder="Nama Barang">
-                           
+                            <input type="text" name="e_nama_barang" value="{{old('e_nama_barang')}}" class="form-control @error('e_nama_barang') is-invalid @enderror" id="e_nama_barang" placeholder="Nama Barang">
+                            <div class="invalid-feedback">
+                             
+                              @error('e_nama_barang')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
                           
                         </div>
                         <div class="col-lg-6">
                           <label>Harga Barang</label>
-                            <input type="text" class="form-control" id="e_harga_barang" placeholder="Harga Barang">
-                           
+                            <input type="text" name="e_harga_barang" value="{{old('e_harga_barang')}}" class="form-control @error('e_harga_barang') is-invalid @enderror" id="e_harga_barang" placeholder="Harga Barang">
+                            <div class="invalid-feedback">
+                             
+                              @error('e_harga_barang')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
                           
                         </div>
 
                         <div class="col-lg-6">
                           <label>Satuan</label>
-                            <select class="form-select" id="e_satuan_id" aria-label="Floating label select example">
-                              <option selected value="">Pilih Satuan</option>
+                            <select name="e_satuan_id" class="form-select @error('e_satuan_id') is-invalid @enderror" id="e_satuan_id" aria-label="Floating label select example">
+                              <option selected value="">--Pilih--</option>
 
                               @foreach ($satuan as $s)
 
@@ -231,20 +269,36 @@
 
                               @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                             
+                              @error('e_satuan_id')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
                           
                           
                         </div>
 
                         <div class="col-lg-6">
                             <label>Merek</label>
-                            <select class="form-select" id="e_merek_id" aria-label="Floating label select example">
-                              <option selected value="">Pilih Merek</option>
+                            <select name="e_merek_id" class="form-select @error('e_merek_id') is-invalid @enderror" id="e_merek_id" aria-label="Floating label select example">
+                              <option selected value="">--Pilih--</option>
                               @foreach ($merek as $m)
 
                               <option value="{{$m['id_merek']}}">{{$m['nama_merek']}}</option>
 
                               @endforeach
                             </select>
+                            <div class="invalid-feedback">
+                             
+                              @error('e_merek_id')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
                            
                           
                         </div>
@@ -254,7 +308,7 @@
                       </div>
 
 
-                    </form>
+                    
 
 
 
@@ -262,8 +316,9 @@
                   </div>
                   <div class="modal-footer">
 
-                    <button type="button" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                   </div>
+                </form>
                 </div>
               </div>
             </div>
@@ -277,7 +332,7 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" id="coba4">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidasiBarang;
+use App\Http\Requests\ValidasiEditBarang;
 use App\Models\Model_barang;
 use App\Models\Model_satuan;
 use App\Models\Model_merek;
@@ -55,8 +56,18 @@ class BarangController extends Controller
 
         $validated = $request->validated();
 
-        return redirect('/barang');
-        //->with('pesan_barang', 'Data barang berhasil ditambahkan!');
+         Model_barang::create([
+            'nama_barang' => $request->nama_barang,
+            'harga_barang' => $request->harga_barang,
+            'satuan_id' => $request->satuan_id,
+            'merek_id' => $request->merek_id
+
+        ]);
+
+
+
+        return redirect('/barang')
+        ->with('pesan_barang', 'Data barang berhasil ditambahkan!');
     }
 
     /**
@@ -88,9 +99,12 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidasiEditBarang $request, $id)
     {
-        //
+        $validated = $request->validated();
+        //view('barang/daftar_barang', ['barang' => $barang]);
+
+        return redirect('/barang');
     }
 
     /**
