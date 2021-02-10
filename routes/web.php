@@ -25,4 +25,4 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/barang', [BarangController::class, 'index'])->name('daftar_barang');
-
+Route::post('/barang', [BarangController:: class, 'store']);

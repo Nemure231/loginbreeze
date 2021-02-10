@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ValidasiBarang;
 use App\Models\Model_barang;
 use App\Models\Model_satuan;
 use App\Models\Model_merek;
@@ -49,9 +50,13 @@ class BarangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidasiBarang $request)
     {
-        //
+
+        $validated = $request->validated();
+
+        return redirect('/barang');
+        //->with('pesan_barang', 'Data barang berhasil ditambahkan!');
     }
 
     /**

@@ -1,9 +1,17 @@
-
-
+// new TomSelect("#satuan_id",{
+// 	create: true,
+// 	sortField: {
+// 		field: "text",
+// 		direction: "asc"
+// 	}
+// });
 
 document.getElementById('tombolTambah').addEventListener('click', function(){
   new bootstrap.Modal(document.getElementById('modalTambah')).show();
 });
+
+
+/////////////////EDIT///////////////////
 
 
 var tombolEdit = document.getElementsByClassName('tombolEdit');
@@ -24,6 +32,9 @@ Array.prototype.forEach.call(tombolEdit, function(element) {
   });
 });
 
+
+
+
 /////////////////////Modal Hapus/////////////////////////////
 
 var tombolHapus = document.getElementsByClassName('tombolHapus');
@@ -39,6 +50,16 @@ Array.prototype.forEach.call(tombolHapus, function(element) {
     });
   });
 });
+
+
+
+
+var meh = document.getElementById('pesan_validasi_barang').innerHTML
+
+if(meh){
+  new bootstrap.Modal(document.getElementById('modalTambah')).show();
+
+}
 
 
 // //////////////////////MODAL TAILWIND///////////////////////////////

@@ -21,6 +21,10 @@
               Tambah Barang
             </button>
 
+            
+
+            
+
             <table class="table-auto border-collapse w-full">
               <thead>
                 <tr class="rounded-lg text-sm font-medium text-gray-700 text-left" style="font-size: 0.9674rem">
@@ -60,6 +64,16 @@
             </table>
 
 
+            @if ($errors->any())
+                <div class="invisible">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li id="pesan_validasi_barang">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
 
             {{-- Modal Tambah --}}
 
@@ -72,26 +86,45 @@
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
+                  <form method="post" action="{{url('/barang')}}">
+                    @csrf
                   <div class="modal-body">
-                    <form method="post" action="">
-                      @csrf
+                   
                       <div class="row">
-                        <div class="col-lg-6">
-                          <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="nama_barang" placeholder="Nama Barang">
-                            <label>Nama Barang</label>
-                          </div>
+                        <div class="col-lg-6 mb-3">
+                          <label>Nama Barang</label>
+                            <input type="text" class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang" name="nama_barang">
+                            <div class="invalid-feedback">
+                             
+                              @error('nama_barang')
+                            {{ $message }}
+                              @enderror
+                             
+                            
+                            </div>
+                          
+                       
+                         
                         </div>
-                        <div class="col-lg-6">
-                          <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="harga_barang" placeholder="Harga Barang">
-                            <label>Harga Barang</label>
-                          </div>
+                        <div class="col-lg-6 mb-3">
+                          <label>Harga Barang</label>
+                            <input type="text" class="form-control @error('harga_barang') is-invalid @enderror" id="harga_barang" name="harga_barang">
+                            <div class="invalid-feedback">
+                             
+                              @error('harga_barang')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
+                              
+                      
+                          
                         </div>
 
-                        <div class="col-lg-6">
-                          <div class="form-floating mb-3">
-                            <select class="form-select" id="satuan_id" aria-label="Floating label select example">
+                        <div class="col-lg-6 mb-3">
+                          <label>Pilih Satuan</label>
+                            <select class="form-select @error('satuan_id') is-invalid @enderror" id="satuan_id" name="satuan_id" aria-label="Floating label select example">
                               <option selected value=""></option>
 
                               @foreach ($satuan as $s)
@@ -100,13 +133,23 @@
 
                               @endforeach
                             </select>
-                            <label for="floatingSelect">Pilih Satuan</label>
-                          </div>
+                            <div class="invalid-feedback">
+                             
+                              @error('satuan_id')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
+
+                            
+                            
+                          
                         </div>
 
-                        <div class="col-lg-6">
-                          <div class="form-floating mb-3">
-                            <select class="form-select" id="merek_id" aria-label="Floating label select example">
+                        <div class="col-lg-6 mb-3">
+                         <label>Pilih Merek</label>
+                            <select class="form-select @error('merek_id') is-invalid @enderror" id="merek_id" name="merek_id" aria-label="Floating label select example">
                               <option selected value=""></option>
                               @foreach ($merek as $m)
 
@@ -114,8 +157,17 @@
 
                               @endforeach
                             </select>
-                            <label for="floatingSelect">Pilih Merek</label>
-                          </div>
+
+                            <div class="invalid-feedback">
+                             
+                              @error('merek_id')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
+                            
+                          
                         </div>
 
 
@@ -123,13 +175,14 @@
                       </div>
 
 
-                    </form>
+                    
 
                   </div>
                   <div class="modal-footer">
                     
-                    <button type="button" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -155,22 +208,22 @@
                       @csrf
                       <div class="row">
                         <div class="col-lg-6">
-                          <div class="form-floating mb-3">
+                          <label>Nama Barang</label>
                             <input type="text" class="form-control" id="e_nama_barang" placeholder="Nama Barang">
-                            <label>Nama Barang</label>
-                          </div>
+                           
+                          
                         </div>
                         <div class="col-lg-6">
-                          <div class="form-floating mb-3">
+                          <label>Harga Barang</label>
                             <input type="text" class="form-control" id="e_harga_barang" placeholder="Harga Barang">
-                            <label>Harga Barang</label>
-                          </div>
+                           
+                          
                         </div>
 
                         <div class="col-lg-6">
-                          <div class="form-floating mb-3">
+                          <label>Satuan</label>
                             <select class="form-select" id="e_satuan_id" aria-label="Floating label select example">
-                              <option selected value=""></option>
+                              <option selected value="">Pilih Satuan</option>
 
                               @foreach ($satuan as $s)
 
@@ -178,22 +231,22 @@
 
                               @endforeach
                             </select>
-                            <label for="floatingSelect">Pilih Satuan</label>
-                          </div>
+                          
+                          
                         </div>
 
                         <div class="col-lg-6">
-                          <div class="form-floating mb-3">
+                            <label>Merek</label>
                             <select class="form-select" id="e_merek_id" aria-label="Floating label select example">
-                              <option selected value=""></option>
+                              <option selected value="">Pilih Merek</option>
                               @foreach ($merek as $m)
 
                               <option value="{{$m['id_merek']}}">{{$m['nama_merek']}}</option>
 
                               @endforeach
                             </select>
-                            <label for="floatingSelect">Pilih Merek</label>
-                          </div>
+                           
+                          
                         </div>
 
 
