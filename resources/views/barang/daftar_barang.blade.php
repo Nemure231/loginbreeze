@@ -148,7 +148,7 @@
                         </div>
 
                         <div class="col-lg-6 mb-3">
-                          <label>Pilih Satuan</label>
+                          <label>Satuan</label>
                             <select class="form-select @error('satuan_id') is-invalid @enderror" id="satuan_id" name="satuan_id" aria-label="Floating label select example">
                               <option selected value="">--Pilih--</option>
 
@@ -171,7 +171,7 @@
                         </div>
 
                         <div class="col-lg-6 mb-3">
-                         <label>Pilih Merek</label>
+                         <label>Merek</label>
                             <select class="form-select @error('merek_id') is-invalid @enderror" id="merek_id" name="merek_id" aria-label="Floating label select example">
                               <option selected value="">--Pilih--</option>
 
@@ -224,14 +224,14 @@
                     <h5 class="modal-title" id="exampleModalLabel">Edit Barang</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <form method="post" id="form_edit" action="/edit/barang/{{old('id_barang')}}">
+                  <form method="post" id="form_edit">
                     @method('put')
                     @csrf
                   <div class="modal-body" id="modalBodyEdit">
 
                     
                       <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mb-3">
                           <label>Nama Barang</label>
                             <input type="text" name="e_nama_barang" value="{{old('e_nama_barang')}}" class="form-control @error('e_nama_barang') is-invalid @enderror" id="e_nama_barang" placeholder="Nama Barang">
                             <div class="invalid-feedback">
@@ -244,7 +244,7 @@
                             </div>
                           
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mb-3">
                           <label>Harga Barang</label>
                             <input type="text" name="e_harga_barang" value="{{old('e_harga_barang')}}" class="form-control @error('e_harga_barang') is-invalid @enderror" id="e_harga_barang" placeholder="Harga Barang">
                             <div class="invalid-feedback">
@@ -258,7 +258,7 @@
                           
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mb-3">
                           <label>Satuan</label>
                             <select name="e_satuan_id" class="form-select @error('e_satuan_id') is-invalid @enderror" id="e_satuan_id" aria-label="Floating label select example">
                               <option selected value="">--Pilih--</option>
@@ -281,7 +281,7 @@
                           
                         </div>
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mb-3">
                             <label>Merek</label>
                             <select name="e_merek_id" class="form-select @error('e_merek_id') is-invalid @enderror" id="e_merek_id" aria-label="Floating label select example">
                               <option selected value="">--Pilih--</option>

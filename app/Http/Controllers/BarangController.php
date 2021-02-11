@@ -99,12 +99,21 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidasiEditBarang $request, $id)
+    public function update(ValidasiEditBarang $request, Model_barang $barang)
     {
         $validated = $request->validated();
-        //view('barang/daftar_barang', ['barang' => $barang]);
-
-        return redirect('/barang');
+        
+        Model_barang::where('id_barang', $barang->id_barang)
+                    ->update([
+                        //yang kiri dari database //dan yang kanan dari name form input
+                        'nama_barang' => $request->e_nama_barang,
+                        'satuan_id' => $request->e_satuan_id,
+                        'merek_id' => $request->e_merek_id,
+                        'harga_barang' => $request->e_harga_barang
+                    ]);
+        // dd($barang->id_barang);
+                        
+        return redirect('/barang')->with('pesan_barang', 'Data barang berhasil diedit!');
     }
 
     /**
@@ -113,8 +122,10 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Model_barang $barang)
     {
-        //
+        Model_barang::destroy($barang->id_barang);
+        return redirect('/barang')->with('pesan_barang', 'Data barang berhasil dihapus!');
+    
     }
 }

@@ -26,4 +26,5 @@ require __DIR__.'/auth.php';
 
 Route::get('/barang', [BarangController::class, 'index'])->name('daftar_barang');
 Route::post('/barang', [BarangController:: class, 'store']);
-Route::put('/edit_barang/{id}', [BarangCOntroller::class, 'update']);
+Route::put('/barang/{barang}', [BarangCOntroller::class, 'update']);
+Route::delete('/barang/{barang}', [BarangController::class, 'destroy']);
