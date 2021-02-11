@@ -11,7 +11,7 @@
       {{ __('Daftar Barang') }}
     </h2>
   </x-slot>
-
+  
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,26 +29,28 @@
             @endif
 
 
-            <table class="table-auto border-collapse w-full">
+            <table class="table" id="tabel-barang">
               <thead>
-                <tr class="rounded-lg text-sm font-medium text-gray-700 text-left" style="font-size: 0.9674rem">
-                  <th class="px-4 py-2 bg-gray-200 " style="background-color:#f8f8f8">Nama Barang</th>
-                  <th class="px-4 py-2 " style="background-color:#f8f8f8">Merek</th>
-                  <th class="px-4 py-2 " style="background-color:#f8f8f8">Satuan</th>
-                  <th class="px-4 py-2 " style="background-color: #f8f8f8">Harga</th>
-                  <th class="px-4 py-2 " style="background-color: #f8f8f8">Opsi</th>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nama Barang</th>
+                  <th scope="col">Merek</th>
+                  <th scope="col">Satuan</th>
+                  <th scope="col">Harga</th>
+                  <th scope="col">Opsi</th>
                 </tr>
               </thead>
-              <tbody class="text-sm font-normal text-gray-700">
+              <tbody>
                 @foreach ($barang as $db)
 
 
-                <tr class="hover:bg-gray-100 border-b border-gray-200 py-10">
-                  <td class="px-4 py-4">{{$db['nama_barang']}}</td>
-                  <td class="px-4 py-4">{{$db['merek_id']}}</td>
-                  <td class="px-4 py-4">{{$db['satuan_id']}}</td>
-                  <td class="px-4 py-4">{{$db['harga_barang']}}</td>
-                  <td class="px-4 py-4">
+                <tr>
+                  <th scope="row">{{$loop->iteration }}</th>
+                  <td>{{$db['nama_barang']}}</td>
+                  <td>{{$db['merek_id']}}</td>
+                  <td>{{$db['satuan_id']}}</td>
+                  <td>{{$db['harga_barang']}}</td>
+                  <td>
 
 
                     <button type="button" class="btn btn-warning tombolEdit" data-nama_barang="{{$db['nama_barang']}}"
@@ -233,8 +235,8 @@
                       <div class="row">
                         <div class="col-lg-6 mb-3">
                           <label>Nama Barang</label>
-                            <input type="text" name="e_nama_barang" value="{{old('e_nama_barang')}}" class="form-control @error('e_nama_barang') is-invalid @enderror" id="e_nama_barang" placeholder="Nama Barang">
-                            <div class="invalid-feedback">
+                            <input type="text" name="e_nama_barang" value="{{old('e_nama_barang')}}" class="hapus-validasi-border form-control @error('e_nama_barang') is-invalid @enderror" id="e_nama_barang" placeholder="Nama Barang">
+                            <div class="invalid-feedback" id="hapus-validasi">
                              
                               @error('e_nama_barang')
                             {{ $message }}
@@ -246,8 +248,8 @@
                         </div>
                         <div class="col-lg-6 mb-3">
                           <label>Harga Barang</label>
-                            <input type="text" name="e_harga_barang" value="{{old('e_harga_barang')}}" class="form-control @error('e_harga_barang') is-invalid @enderror" id="e_harga_barang" placeholder="Harga Barang">
-                            <div class="invalid-feedback">
+                            <input type="text" name="e_harga_barang" value="{{old('e_harga_barang')}}" class="hapus-validasi-border form-control @error('e_harga_barang') is-invalid @enderror" id="e_harga_barang" placeholder="Harga Barang">
+                            <div class="invalid-feedback" id="hapus-validasi">
                              
                               @error('e_harga_barang')
                             {{ $message }}
@@ -260,16 +262,19 @@
 
                         <div class="col-lg-6 mb-3">
                           <label>Satuan</label>
-                            <select name="e_satuan_id" class="form-select @error('e_satuan_id') is-invalid @enderror" id="e_satuan_id" aria-label="Floating label select example">
+                            <select name="e_satuan_id" class="hapus-validasi-border form-select @error('e_satuan_id') is-invalid @enderror" id="e_satuan_id" aria-label="Floating label select example">
                               <option selected value="">--Pilih--</option>
 
-                              @foreach ($satuan as $s)
+                              {{-- @foreach ($satuan as $s)
 
                               <option value="{{$s['id_satuan']}}">{{$s['nama_satuan']}}</option>
 
+                              @endforeach --}}
+                              @foreach($satuan as $s)
+                              <option value={{$s['id_satuan']}} {{(old('e_satuan_id') == $s['id_satuan']?'selected':'')}} >{{$s['nama_satuan']}}</option>
                               @endforeach
                             </select>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="hapus-validasi">
                              
                               @error('e_satuan_id')
                             {{ $message }}
@@ -283,15 +288,19 @@
 
                         <div class="col-lg-6 mb-3">
                             <label>Merek</label>
-                            <select name="e_merek_id" class="form-select @error('e_merek_id') is-invalid @enderror" id="e_merek_id" aria-label="Floating label select example">
+                            <select name="e_merek_id" class="hapus-validasi-border form-select @error('e_merek_id') is-invalid @enderror" id="e_merek_id" aria-label="Floating label select example">
                               <option selected value="">--Pilih--</option>
-                              @foreach ($merek as $m)
+                              {{-- @foreach ($merek as $m)
 
                               <option value="{{$m['id_merek']}}">{{$m['nama_merek']}}</option>
 
+                              @endforeach --}}
+
+                              @foreach($merek as $m)
+                              <option value={{$m['id_merek']}} {{(old('e_merek_id') == $m['id_merek']?'selected':'')}} >{{$m['nama_merek']}}</option>
                               @endforeach
                             </select>
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback" id="hapus-validasi">
                              
                               @error('e_merek_id')
                             {{ $message }}

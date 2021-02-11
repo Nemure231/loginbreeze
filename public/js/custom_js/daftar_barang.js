@@ -6,7 +6,7 @@
 // 	}
 // });
 
-
+///Fungsi DOM sudah siap dieksekusi via javascript murni
 function ready(fn) {
   if (document.readyState != 'loading') {
     fn();
@@ -16,11 +16,21 @@ function ready(fn) {
 }
 
 
+ready(function () {
+  //Memanggil fungsi datatable
+  const dataTable = new simpleDatatables.DataTable("#tabel-barang", {
+    searchable: true,
+    fixedHeight: true,
+
+  });
+
+
+});
+
+
 /////////////
 
 ready(function () {
-
-
 
 
   document.getElementById('tombolTambah').addEventListener('click', function () {
@@ -45,13 +55,13 @@ ready(function () {
         document.getElementById('e_merek_id').value = element.dataset.merek_id;
         document.getElementById('e_satuan_id').value = element.dataset.satuan_id;
         document.getElementById('form_edit').setAttribute("action", "/barang/" + element.dataset.id_barang);
-
+        ///fungsi menyimpan data terakhir di local browser
         var id_barang = element.dataset.id_barang;
-        var merek_id = element.dataset.merek_id;
-        var satuan_id = element.dataset.satuan_id;
+        // var merek_id = element.dataset.merek_id;
+        // var satuan_id = element.dataset.satuan_id;
         localStorage.setItem("simpan_id_barang", id_barang);
-        localStorage.setItem("simpan_merek_id", merek_id);
-        localStorage.setItem("simpan_satuan_id", satuan_id);
+        // localStorage.setItem("simpan_merek_id", merek_id);
+        // localStorage.setItem("simpan_satuan_id", satuan_id);
 
 
       });
@@ -80,12 +90,11 @@ ready(function () {
     });
   });
 
-
+  
   var tambah = document.getElementById('pesan_validasi_barang').innerHTML;
   var edit = document.getElementById('pesan_validasi_edit_barang').innerHTML;
 
-  // tamba = (tambah.trim) ? htmlstring.trim() : tambah.replace(/^\s+/,'');
-  // edi = (edit.trim) ? htmlstring.trim() : edit.replace(/^\s+/,'');
+  ///logika 1: jika pada pesan validasi hanya tampil '0    ' maka munculkan sesuai jenis modal
 
   if (tambah != '0    ') {
     new bootstrap.Modal(document.getElementById('modalTambah')).show();
@@ -96,19 +105,39 @@ ready(function () {
   }
 
 
-  var myModalEl = document.getElementById('modalEdit');
+  var modalEdit = document.getElementById('modalEdit');
+   //fungsi mengambil file yang tersimpan di local browser
   var id_barang = localStorage.getItem("simpan_id_barang");
-  var satuan = localStorage.getItem("simpan_satuan_id");
-  var merek = localStorage.getItem("simpan_merek_id");
-  myModalEl.addEventListener('shown.bs.modal', function (event) {
+  // var satuan = localStorage.getItem("simpan_satuan_id");
+  // var merek = localStorage.getItem("simpan_merek_id");
+
+  ///event jika: modal pada logika  1 aktif maka ubah atribut action dengan menggambil id_barang di penyimpanan local
+  modalEdit.addEventListener('shown.bs.modal', function (event) {
 
     document.getElementById('form_edit').setAttribute("action", "/barang/" + id_barang);
-    document.getElementById('e_satuan_id').value = satuan;
-    document.getElementById('e_merek_id').value = merek;
+
+    //document.getElementById('e_satuan_id').value = satuan;
+    // document.getElementById('e_merek_id').value = merek;
 
 
   });
+  var validasiText = document.getElementById('hapus-validasi');
+  var validasiBorder = document.getElementsByClassName('hapus-validasi-border');
+
+  modalEdit.addEventListener('hidden.bs.modal', function (event) {
+    //looping dibutuhkan untuk mengeksekusi semua class yang sama
+    for (var i = 0; i < validasiBorder.length; i++) {
+      validasiBorder[i].classList.remove("is-invalid");
+    }
+    validasiText.remove("invalid-feedback");
+
+
+  });
+
+
+
 });
+
 
 
 
