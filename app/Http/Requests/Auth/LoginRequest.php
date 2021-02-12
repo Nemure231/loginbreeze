@@ -34,6 +34,17 @@ class LoginRequest extends FormRequest
         ];
     }
 
+
+    public function messages(){
+        return [
+            'email.required' => 'Harus diisi!',
+            'email.string' => 'Harus string',
+            'email.email' => 'Harus bertipe email!',
+            'password.required' => 'Harus diisi',
+            'password.string' => 'Harus string!'
+        ];
+    }
+
     /**
      * Attempt to authenticate the request's credentials.
      *

@@ -25,6 +25,14 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+///route verifikasi email pada auth, yang artinya jika email belum pernah diverivikasi user tidak bisa
+///mengakses halaman di dalam fungsi group ferivikasi
+Route::middleware(['auth', 'verified'])->group(function(){
+///////////Dashboard//////////
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 ///Crud Barang///////////
 Route::get('/barang', [BarangController::class, 'index'])->name('daftar_barang');
 Route::post('/barang', [BarangController:: class, 'store']);
@@ -37,3 +45,6 @@ Route::get('/role', [RoleController::class, 'index'])->name('daftar_role');
 Route::post('/role', [RoleController:: class, 'store']);
 Route::put('/role/{role}', [RoleController::class, 'update']);
 Route::delete('/role/{role}', [RoleController::class, 'destroy']);
+
+
+});
