@@ -18,7 +18,7 @@ function ready(fn) {
 
 ready(function () {
   //Memanggil fungsi datatable
-  const dataTable = new simpleDatatables.DataTable("#tabel-barang", {
+  const dataTable = new simpleDatatables.DataTable("#tabel-role", {
     searchable: true,
     fixedHeight: true,
 
@@ -33,36 +33,28 @@ ready(function () {
 ready(function () {
 
 
-  document.getElementById('tombolTambah').addEventListener('click', function () {
-    new bootstrap.Modal(document.getElementById('modalTambah')).show();
+  document.getElementById('tombol-tambah').addEventListener('click', function () {
+    new bootstrap.Modal(document.getElementById('modal-tambah')).show();
   });
 
 
   /////////////////EDIT///////////////////
 
 
-  var tombolEdit = document.getElementsByClassName('tombolEdit');
+  var tombolEdit = document.getElementsByClassName('tombol-edit');
   Array.prototype.forEach.call(tombolEdit, function (element) {
     element.addEventListener('click', function () {
-      new bootstrap.Modal(document.getElementById('modalEdit')).show();
+      new bootstrap.Modal(document.getElementById('modal-edit')).show();
 
-      var e1ModalEdit = document.getElementById('modalEdit');
+      var e1ModalEdit = document.getElementById('modal-edit');
       e1ModalEdit.addEventListener('shown.bs.modal', function (e) {
 
-        document.getElementById('e_nama_barang').value = element.dataset.nama_barang;
-        document.getElementById('e_harga_barang').value = element.dataset.harga_barang;
-        document.getElementById('e_merek_id').value = element.dataset.merek_id;
-        document.getElementById('e_satuan_id').value = element.dataset.satuan_id;
-        document.getElementById('form_edit').setAttribute("action", "/barang/" + element.dataset.id_barang);
+        document.getElementById('e-nama-role').value = element.dataset.nama_role;
+        document.getElementById('form-edit').setAttribute("action", "/role/" + element.dataset.id_role);
         ///fungsi menyimpan data terakhir di local browser
-        var id_barang = element.dataset.id_barang;
-        // var merek_id = element.dataset.merek_id;
-        // var satuan_id = element.dataset.satuan_id;
-        localStorage.setItem("simpan_id_barang", id_barang);
-        // localStorage.setItem("simpan_merek_id", merek_id);
-        // localStorage.setItem("simpan_satuan_id", satuan_id);
-
-
+        var id_role = element.dataset.id_role;
+       
+        localStorage.setItem("simpan_id_role", id_role);
       });
     });
 
@@ -75,45 +67,45 @@ ready(function () {
 
   /////////////////////Modal Hapus/////////////////////////////
 
-  var tombolHapus = document.getElementsByClassName('tombolHapus');
+  var tombolHapus = document.getElementsByClassName('tombol-hapus');
   Array.prototype.forEach.call(tombolHapus, function (element) {
     element.addEventListener('click', function () {
-      new bootstrap.Modal(document.getElementById('modalHapus')).show();
+      new bootstrap.Modal(document.getElementById('modal-hapus')).show();
 
-      var e1ModalHapus = document.getElementById('modalHapus');
+      var e1ModalHapus = document.getElementById('modal-hapus');
       e1ModalHapus.addEventListener('shown.bs.modal', function (e) {
 
-        document.getElementById('form_hapus').setAttribute("action", "/barang/" + element.dataset.id_barang);
+        document.getElementById('form-hapus').setAttribute("action", "/role/" + element.dataset.id_role);
 
       });
     });
   });
 
   
-  var tambah = document.getElementById('pesan_validasi_barang').innerHTML;
-  var edit = document.getElementById('pesan_validasi_edit_barang').innerHTML;
+  var tambah = document.getElementById('pesan-validasi-role').innerHTML;
+  var edit = document.getElementById('pesan-validasi-edit-role').innerHTML;
 
   ///logika 1: jika pada pesan validasi hanya tampil '0    ' maka munculkan sesuai jenis modal
 
-  if (tambah != '0    ') {
-    new bootstrap.Modal(document.getElementById('modalTambah')).show();
+  if (tambah != '0 ') {
+    new bootstrap.Modal(document.getElementById('modal-tambah')).show();
   }
 
-  if (edit != '0    ') {
-    new bootstrap.Modal(document.getElementById('modalEdit')).show();
+  if (edit != '0 ') {
+    new bootstrap.Modal(document.getElementById('modal-edit')).show();
   }
 
 
-  var modalEdit = document.getElementById('modalEdit');
+  var modalEdit = document.getElementById('modal-edit');
    //fungsi mengambil file yang tersimpan di local browser
-  var id_barang = localStorage.getItem("simpan_id_barang");
+  var id_role = localStorage.getItem("simpan_id_role");
   // var satuan = localStorage.getItem("simpan_satuan_id");
   // var merek = localStorage.getItem("simpan_merek_id");
 
   ///event jika: modal pada logika  1 aktif maka ubah atribut action dengan menggambil id_barang di penyimpanan local
   modalEdit.addEventListener('shown.bs.modal', function (event) {
 
-    document.getElementById('form_edit').setAttribute("action", "/barang/" + id_barang);
+    document.getElementById('form-edit').setAttribute("action", "/role/" + id_role);
 
     //document.getElementById('e_satuan_id').value = satuan;
     // document.getElementById('e_merek_id').value = merek;

@@ -47,8 +47,8 @@
                 <tr>
                   <th scope="row">{{$loop->iteration }}</th>
                   <td>{{$db['nama_barang']}}</td>
-                  <td>{{$db['merek_id']}}</td>
-                  <td>{{$db['satuan_id']}}</td>
+                  <td>{{$db['nama_merek']}}</td>
+                  <td>{{$db['nama_satuan']}}</td>
                   <td>{{$db['harga_barang']}}</td>
                   <td>
 
@@ -235,7 +235,7 @@
                       <div class="row">
                         <div class="col-lg-6 mb-3">
                           <label>Nama Barang</label>
-                            <input type="text" name="e_nama_barang" value="{{old('e_nama_barang')}}" class="hapus-validasi-border form-control @error('e_nama_barang') is-invalid @enderror" id="e_nama_barang" placeholder="Nama Barang">
+                            <input type="text" name="e_nama_barang" value="{{old('e_nama_barang')}}" class="hapus-validasi-border form-control @error('e_nama_barang') is-invalid @enderror" id="e_nama_barang">
                             <div class="invalid-feedback" id="hapus-validasi">
                              
                               @error('e_nama_barang')
@@ -248,7 +248,7 @@
                         </div>
                         <div class="col-lg-6 mb-3">
                           <label>Harga Barang</label>
-                            <input type="text" name="e_harga_barang" value="{{old('e_harga_barang')}}" class="hapus-validasi-border form-control @error('e_harga_barang') is-invalid @enderror" id="e_harga_barang" placeholder="Harga Barang">
+                            <input type="text" name="e_harga_barang" value="{{old('e_harga_barang')}}" class="hapus-validasi-border form-control @error('e_harga_barang') is-invalid @enderror" id="e_harga_barang">
                             <div class="invalid-feedback" id="hapus-validasi">
                              
                               @error('e_harga_barang')

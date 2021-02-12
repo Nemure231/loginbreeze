@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ValidasiRole;
+use App\Http\Requests\ValidasiEditRole;
+use App\Models\Model_role;
 
 class RoleController extends Controller
 {
@@ -11,9 +14,14 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(){
+        $role =  Model_role::select('id_role', 'nama_role')
+                                ->get(); 
+
+        return view('role/daftar_role',
+            ['role' => $role]
+            
+        );
     }
 
     /**
@@ -32,9 +40,16 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidasiRole $request)
     {
-        //
+        $validated = $request->validated();
+
+        Model_role::create([
+           'nama_role' => $request->nama_role,
+
+       ]);
+       return redirect('/role')
+       ->with('pesan_role', 'Data role berhasil ditambahkan!');
     }
 
     /**
@@ -66,9 +81,18 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidasiEditRole $request, Model_role $role)
     {
-        //
+        $validated = $request->validated();
+        
+        Model_role::where('id_role', $role->id_role)
+                    ->update([
+                        //yang kiri dari database //dan yang kanan dari name form input
+                        'nama_role' => $request->e_nama_role
+                    ]);
+        // dd($barang->id_barang);
+                        
+        return redirect('/role')->with('pesan_role', 'Data role berhasil diedit!');
     }
 
     /**
@@ -77,8 +101,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Model_role $role)
     {
-        //
+        Model_role::destroy($role->id_role);
+        return redirect('/role')->with('pesan_role', 'Data role berhasil dihapus!');
     }
 }

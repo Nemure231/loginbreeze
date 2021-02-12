@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,15 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+///Crud Barang///////////
 Route::get('/barang', [BarangController::class, 'index'])->name('daftar_barang');
 Route::post('/barang', [BarangController:: class, 'store']);
-Route::put('/barang/{barang}', [BarangCOntroller::class, 'update']);
+Route::put('/barang/{barang}', [BarangController::class, 'update']);
 Route::delete('/barang/{barang}', [BarangController::class, 'destroy']);
+
+
+///////Crud Role/////////////
+Route::get('/role', [RoleController::class, 'index'])->name('daftar_role');
+Route::post('/role', [RoleController:: class, 'store']);
+Route::put('/role/{role}', [RoleController::class, 'update']);
+Route::delete('/role/{role}', [RoleController::class, 'destroy']);

@@ -18,7 +18,9 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barang =  Model_barang::select('id_barang', 'nama_barang', 'satuan_id', 'merek_id', 'harga_barang')
+        $barang =  Model_barang::join('satuan', 'barang.satuan_id', '=', 'satuan.id_satuan')
+                                ->join('merek', 'barang.merek_id', '=', 'merek.id_merek')
+                                ->select('id_barang', 'nama_barang', 'satuan_id', 'merek_id', 'harga_barang', 'nama_satuan', 'nama_merek')
                                 ->get();
         $satuan =  Model_satuan::select('id_satuan', 'nama_satuan')
                                 ->get(); 
