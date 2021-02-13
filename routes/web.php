@@ -38,6 +38,8 @@ Route::get('/barang', [BarangController::class, 'index'])->name('daftar_barang')
 Route::post('/barang', [BarangController:: class, 'store']);
 Route::put('/barang/{barang}', [BarangController::class, 'update']);
 Route::delete('/barang/{barang}', [BarangController::class, 'destroy']);
+Route::get('/barang/export', [BarangController::class, 'export']);
+Route::post('/barang/import', [BarangController::class, 'import']);
 
 
 ///////Crud Role/////////////

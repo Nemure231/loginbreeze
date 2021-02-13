@@ -95,11 +95,11 @@ ready(function () {
 
   ///logika 1: jika pada pesan validasi hanya tampil '0    ' maka munculkan sesuai jenis modal
 
-  if (tambah != '0    ') {
+  if (tambah != 0) {
     new bootstrap.Modal(document.getElementById('modalTambah')).show();
   }
 
-  if (edit != '0    ') {
+  if (edit != 0) {
     new bootstrap.Modal(document.getElementById('modalEdit')).show();
   }
 

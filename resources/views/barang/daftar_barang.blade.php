@@ -11,15 +11,69 @@
       {{ __('Daftar Barang') }}
     </h2>
   </x-slot>
-  
+
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
           <div class="overflow-x-auto mt-6">
-            <button type="button" class="btn btn-primary mb-4" id="tombolTambah">
-              Tambah Barang
-            </button>
+
+            <div class="row">
+              <div class="col-lg-8 col-md-6 col-sm-6">
+
+                <button type="button" class="btn btn-primary" id="tombolTambah">
+                  Tambah Barang
+                </button>
+              </div>
+
+
+
+
+              <div class="col-lg-4 col-md-6 col-sm-6">
+
+                <div class="d-grid gap-2 d-sm-flex justify-content-end">
+                  <a href="{{url('barang/export')}}" class="btn btn-success">
+                    Export Excel
+                  </a>
+                </div>
+
+
+
+                <form method="post" action="{{url('barang/import')}}" enctype="multipart/form-data">
+                  @csrf
+                  
+
+                  <div class="input-group mb-3 mt-3">
+                    <input type="file" name="excel_barang" class="form-control"
+                      placeholder="Recipient's username" aria-label="Recipient's username"
+                      aria-describedby="button-addon2">
+                      
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Import Excel</button>
+                       
+                        
+      
+
+                  </div>
+                  <div class="text-danger">
+
+                    @error('nama_barang')
+                    {{ $message }}
+                    @enderror
+
+
+                  </div>
+                
+
+
+
+                </form>
+                {{-- <div class="d-grid gap-2 d-md-flex justify-content-md-end"> --}}
+
+
+
+              </div>
+
+            </div>
 
             @if (session('pesan_barang'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -71,35 +125,39 @@
 
 
             {{-- @if ($errors->any())
-                <div class="invisible">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li id="pesan_validasi_barang">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="invisible">
+              <ul>
+                @foreach ($errors->all() as $error)
+                <li id="pesan_validasi_barang">{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
             @endif --}}
-            
-            
-            
-            <div class="invisible" id="pesan_validasi_barang">0 @error('harga_barang'){{$message}}@enderror @error('nama_barang'){{$message}}@enderror @error('satuan_id'){{$message}}@enderror @error('merek_id'){{$message}}@enderror</div>
-
-            <div class="invisible" id="pesan_validasi_edit_barang">0 @error('e_harga_barang'){{$message}}@enderror @error('e_nama_barang'){{$message}}@enderror @error('e_satuan_id'){{$message}}@enderror @error('e_merek_id'){{$message}}@enderror</div>
-
-
-              {{-- @if ($errors->any())
-              <div class="invisible">
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li id="pesan_validasi_edit_barang">{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-          @endif --}}
 
 
 
-          
+            <div class="invisible" id="pesan_validasi_barang">0 @error('harga_barang'){{$message}}@enderror
+              @error('nama_barang'){{$message}}@enderror @error('satuan_id'){{$message}}@enderror
+              @error('merek_id'){{$message}}@enderror</div>
+
+            <div class="invisible" id="pesan_validasi_edit_barang">0 @error('e_harga_barang'){{$message}}@enderror
+              @error('e_nama_barang'){{$message}}@enderror @error('e_satuan_id'){{$message}}@enderror
+              @error('e_merek_id'){{$message}}@enderror</div>
+
+
+            {{-- @if ($errors->any())
+            <div class="invisible">
+              <ul>
+                @foreach ($errors->all() as $error)
+                <li id="pesan_validasi_edit_barang">{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+            @endif --}}
+
+
+
+
 
 
             {{-- Modal Tambah --}}
@@ -115,84 +173,92 @@
                   </div>
                   <form method="post" action="{{url('/barang')}}">
                     @csrf
-                  <div class="modal-body">
-                   
+                    <div class="modal-body">
+
                       <div class="row">
                         <div class="col-lg-6 mb-3">
                           <label>Nama Barang</label>
-                            <input type="text" value="{{old('nama_barang')}}" class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang" name="nama_barang">
-                            <div class="invalid-feedback">
-                             
-                              @error('nama_barang')
+                          <input type="text" value="{{old('nama_barang')}}"
+                            class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang"
+                            name="nama_barang">
+                          <div class="invalid-feedback">
+
+                            @error('nama_barang')
                             {{ $message }}
-                              @enderror
-                             
-                            
-                            </div>
-                          
-                       
-                         
+                            @enderror
+
+
+                          </div>
+
+
+
                         </div>
                         <div class="col-lg-6 mb-3">
                           <label>Harga Barang</label>
-                            <input type="text" value="{{old('harga_barang')}}" class="form-control @error('harga_barang') is-invalid @enderror" id="harga_barang" name="harga_barang">
-                            <div class="invalid-feedback">
-                             
-                              @error('harga_barang')
+                          <input type="text" value="{{old('harga_barang')}}"
+                            class="form-control @error('harga_barang') is-invalid @enderror" id="harga_barang"
+                            name="harga_barang">
+                          <div class="invalid-feedback">
+
+                            @error('harga_barang')
                             {{ $message }}
-                              @enderror
-                             
-                             
-                            </div>
-                              
-                      
-                          
+                            @enderror
+
+
+                          </div>
+
+
+
                         </div>
 
                         <div class="col-lg-6 mb-3">
                           <label>Satuan</label>
-                            <select class="form-select @error('satuan_id') is-invalid @enderror" id="satuan_id" name="satuan_id" aria-label="Floating label select example">
-                              <option selected value="">--Pilih--</option>
+                          <select class="form-select @error('satuan_id') is-invalid @enderror" id="satuan_id"
+                            name="satuan_id" aria-label="Floating label select example">
+                            <option selected value="">--Pilih--</option>
 
-                              @foreach($satuan as $s)
-                              <option value={{$s['id_satuan']}} {{(old('satuan_id') == $s['id_satuan']?'selected':'')}} >{{$s['nama_satuan']}}</option>
-                              @endforeach
-                            </select>
-                            <div class="invalid-feedback">
-                             
-                              @error('satuan_id')
+                            @foreach($satuan as $s)
+                            <option value={{$s['id_satuan']}} {{(old('satuan_id')==$s['id_satuan']?'selected':'')}}>
+                              {{$s['nama_satuan']}}</option>
+                            @endforeach
+                          </select>
+                          <div class="invalid-feedback">
+
+                            @error('satuan_id')
                             {{ $message }}
-                              @enderror
-                             
-                             
-                            </div>
+                            @enderror
 
-                            
-                            
-                          
+
+                          </div>
+
+
+
+
                         </div>
 
                         <div class="col-lg-6 mb-3">
-                         <label>Merek</label>
-                            <select class="form-select @error('merek_id') is-invalid @enderror" id="merek_id" name="merek_id" aria-label="Floating label select example">
-                              <option selected value="">--Pilih--</option>
+                          <label>Merek</label>
+                          <select class="form-select @error('merek_id') is-invalid @enderror" id="merek_id"
+                            name="merek_id" aria-label="Floating label select example">
+                            <option selected value="">--Pilih--</option>
 
-                              @foreach($merek as $m)
-                              <option value={{$m['id_merek']}} {{(old('merek_id') == $m['id_merek']?'selected':'')}} >{{$m['nama_merek']}}</option>
-                              @endforeach
-                              
-                            </select>
+                            @foreach($merek as $m)
+                            <option value={{$m['id_merek']}} {{(old('merek_id')==$m['id_merek']?'selected':'')}}>
+                              {{$m['nama_merek']}}</option>
+                            @endforeach
 
-                            <div class="invalid-feedback">
-                             
-                              @error('merek_id')
+                          </select>
+
+                          <div class="invalid-feedback">
+
+                            @error('merek_id')
                             {{ $message }}
-                              @enderror
-                             
-                             
-                            </div>
-                            
-                          
+                            @enderror
+
+
+                          </div>
+
+
                         </div>
 
 
@@ -200,13 +266,13 @@
                       </div>
 
 
-                    
 
-                  </div>
-                  <div class="modal-footer">
-                    
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                  </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                      <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -229,87 +295,97 @@
                   <form method="post" id="form_edit">
                     @method('put')
                     @csrf
-                  <div class="modal-body" id="modalBodyEdit">
+                    <div class="modal-body" id="modalBodyEdit">
 
-                    
+
                       <div class="row">
                         <div class="col-lg-6 mb-3">
                           <label>Nama Barang</label>
-                            <input type="text" name="e_nama_barang" value="{{old('e_nama_barang')}}" class="hapus-validasi-border form-control @error('e_nama_barang') is-invalid @enderror" id="e_nama_barang">
-                            <div class="invalid-feedback" id="hapus-validasi">
-                             
-                              @error('e_nama_barang')
+                          <input type="text" name="e_nama_barang" value="{{old('e_nama_barang')}}"
+                            class="hapus-validasi-border form-control @error('e_nama_barang') is-invalid @enderror"
+                            id="e_nama_barang">
+                          <div class="invalid-feedback" id="hapus-validasi">
+
+                            @error('e_nama_barang')
                             {{ $message }}
-                              @enderror
-                             
-                             
-                            </div>
-                          
+                            @enderror
+
+
+                          </div>
+
                         </div>
                         <div class="col-lg-6 mb-3">
                           <label>Harga Barang</label>
-                            <input type="text" name="e_harga_barang" value="{{old('e_harga_barang')}}" class="hapus-validasi-border form-control @error('e_harga_barang') is-invalid @enderror" id="e_harga_barang">
-                            <div class="invalid-feedback" id="hapus-validasi">
-                             
-                              @error('e_harga_barang')
+                          <input type="text" name="e_harga_barang" value="{{old('e_harga_barang')}}"
+                            class="hapus-validasi-border form-control @error('e_harga_barang') is-invalid @enderror"
+                            id="e_harga_barang">
+                          <div class="invalid-feedback" id="hapus-validasi">
+
+                            @error('e_harga_barang')
                             {{ $message }}
-                              @enderror
-                             
-                             
-                            </div>
-                          
+                            @enderror
+
+
+                          </div>
+
                         </div>
 
                         <div class="col-lg-6 mb-3">
                           <label>Satuan</label>
-                            <select name="e_satuan_id" class="hapus-validasi-border form-select @error('e_satuan_id') is-invalid @enderror" id="e_satuan_id" aria-label="Floating label select example">
-                              <option selected value="">--Pilih--</option>
+                          <select name="e_satuan_id"
+                            class="hapus-validasi-border form-select @error('e_satuan_id') is-invalid @enderror"
+                            id="e_satuan_id" aria-label="Floating label select example">
+                            <option selected value="">--Pilih--</option>
 
-                              {{-- @foreach ($satuan as $s)
+                            {{-- @foreach ($satuan as $s)
 
-                              <option value="{{$s['id_satuan']}}">{{$s['nama_satuan']}}</option>
+                            <option value="{{$s['id_satuan']}}">{{$s['nama_satuan']}}</option>
 
-                              @endforeach --}}
-                              @foreach($satuan as $s)
-                              <option value={{$s['id_satuan']}} {{(old('e_satuan_id') == $s['id_satuan']?'selected':'')}} >{{$s['nama_satuan']}}</option>
-                              @endforeach
-                            </select>
-                            <div class="invalid-feedback" id="hapus-validasi">
-                             
-                              @error('e_satuan_id')
+                            @endforeach --}}
+                            @foreach($satuan as $s)
+                            <option value={{$s['id_satuan']}} {{(old('e_satuan_id')==$s['id_satuan']?'selected':'')}}>
+                              {{$s['nama_satuan']}}</option>
+                            @endforeach
+                          </select>
+                          <div class="invalid-feedback" id="hapus-validasi">
+
+                            @error('e_satuan_id')
                             {{ $message }}
-                              @enderror
-                             
-                             
-                            </div>
-                          
-                          
+                            @enderror
+
+
+                          </div>
+
+
                         </div>
 
                         <div class="col-lg-6 mb-3">
-                            <label>Merek</label>
-                            <select name="e_merek_id" class="hapus-validasi-border form-select @error('e_merek_id') is-invalid @enderror" id="e_merek_id" aria-label="Floating label select example">
-                              <option selected value="">--Pilih--</option>
-                              {{-- @foreach ($merek as $m)
+                          <label>Merek</label>
+                          <select name="e_merek_id"
+                            class="hapus-validasi-border form-select @error('e_merek_id') is-invalid @enderror"
+                            id="e_merek_id" aria-label="Floating label select example">
+                            <option selected value="">--Pilih--</option>
+                            {{-- @foreach ($merek as $m)
 
-                              <option value="{{$m['id_merek']}}">{{$m['nama_merek']}}</option>
+                            <option value="{{$m['id_merek']}}">{{$m['nama_merek']}}</option>
 
-                              @endforeach --}}
+                            @endforeach --}}
 
-                              @foreach($merek as $m)
-                              <option value={{$m['id_merek']}} {{(old('e_merek_id') == $m['id_merek']?'selected':'')}} >{{$m['nama_merek']}}</option>
-                              @endforeach
-                            </select>
-                            <div class="invalid-feedback" id="hapus-validasi">
-                             
-                              @error('e_merek_id')
+                            @foreach($merek as $m)
+                            <option value={{$m['id_merek']}} {{(old('e_merek_id')==$m['id_merek']?'selected':'')}}>
+                              {{$m['nama_merek']}}</option>
+                            @endforeach
+                          </select>
+                          <div class="invalid-feedback" id="hapus-validasi">
+
+                            @error('e_merek_id')
                             {{ $message }}
-                              @enderror
-                             
-                             
-                            </div>
-                           
-                          
+                            @enderror
+
+
+                          </div>
+
+
                         </div>
 
 
@@ -317,17 +393,17 @@
                       </div>
 
 
-                    
 
 
 
 
-                  </div>
-                  <div class="modal-footer">
 
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                  </div>
-                </form>
+                    </div>
+                    <div class="modal-footer">
+
+                      <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

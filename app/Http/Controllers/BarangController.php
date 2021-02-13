@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use App\Http\Requests\ValidasiBarang;
 use App\Http\Requests\ValidasiEditBarang;
+use App\Http\Requests\ValidasiExcelBarang;
 use App\Models\Model_barang;
 use App\Models\Model_satuan;
 use App\Models\Model_merek;
+use App\Exports\BarangExport;
+use App\Imports\BarangImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
@@ -130,4 +135,24 @@ class BarangController extends Controller
         return redirect('/barang')->with('pesan_barang', 'Data barang berhasil dihapus!');
     
     }
+
+    public function export()
+    {
+        $tanggal = date('Y-m-d');
+        return Excel::download(new BarangExport, "$tanggal-daftar-barang.xls", \Maatwebsite\Excel\Excel::XLS);
+    }
+
+    public function import(ValidasiExcelBarang $request) 
+    {
+        $validated = $request->validated();
+
+        // if ($request->hasFile('excel_barang')) {
+            $barang = $request->file('excel_barang');
+            Excel::import(new BarangImport, $barang);
+            return redirect('/barang')->with('pesan_barang', 'Data barang berhasil ditambahkan');    
+        // }
+
+        
+    }
+
 }
