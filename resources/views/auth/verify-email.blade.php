@@ -22,7 +22,7 @@
 
                 <div>
                     <x-button>
-                        {{ __('Resend Verification Email') }}
+                        {{ __('Kirim ulang verifikasi e-mail') }}
                     </x-button>
                 </div>
             </form>
@@ -31,7 +31,7 @@
                 @csrf
 
                 <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Logout') }}
+                    {{ __('Keluar') }}
                 </button>
             </form>
         </div>

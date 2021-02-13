@@ -35,16 +35,16 @@ class ValidasiRegister extends FormRequest
         return [
             'name.required' => 'Harus diisi!',
             'name.string' => 'Harus string!',
-            'name.max' => 'Tidak boleh lebih dari 225 huruf!',
+            'name.max' => 'Terlalu panjang!',
             'email.required' => 'Harus diisi',
             'email.string' => 'Harus string!',
             'email.email' => 'Harus bertipe e-mail!',
-            'email.max' => 'Tidak boleh lebih dari 225 huruf!',
+            'email.max' => 'Terlalu panjang!',
             'email.unique' => 'E-mail tersebut sudah terdaftar!',
             'password.required' => 'Harus diisi!',
             'password.string' => 'Harus string!',
             'password.confirmed' => 'Konfrimasi kata sandi harus sama!',
-            'password.min' => 'Tidak boleh kurang dari 8!',
+            'password.min' => 'Terlalu pendek!',
         ];
     }
 }
