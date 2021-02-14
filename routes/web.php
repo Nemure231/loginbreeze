@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SubmenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,12 @@ Route::get('/menu', [MenuController::class, 'index'])->name('daftar_menu');
 Route::post('/menu', [MenuController::class, 'store']);
 Route::put('/menu/{menu}', [MenuController::class, 'update']);
 Route::delete('/menu/{menu}', [MenuController::class, 'destroy']);
+
+////////menu/////////////
+Route::get('/menu', [SubmenuController::class, 'index'])->name('daftar_submenu');
+Route::post('/menu', [SubmenuController::class, 'store']);
+Route::put('/menu/{menu}', [SubmenuController::class, 'update']);
+Route::delete('/menu/{menu}', [SubmenuController::class, 'destroy']);
 
 
 });
