@@ -1,3 +1,34 @@
+<style>
+    .children {
+    background: #fff;
+}
+
+.children a,
+.children .separator {
+    display: block;
+    margin: 5px 0px;
+    padding: 5px 10px;
+}
+
+.children .separator {
+    border-top-width: 2px;
+}
+
+.children a:hover {
+    color: #818cf8;
+}
+
+@media (min-width: 768px) {
+    .children {
+        position: absolute;
+        width: 155px;
+        top: 70px;
+    }
+}
+</style>
+
+
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,7 +41,7 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                {{-- <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
@@ -19,15 +50,44 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('daftar_barang')" :active="request()->routeIs('daftar_barang')">
-                        {{ __('Daftar Barang') }}
+                        {{ __('Barang') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('daftar_role')" :active="request()->routeIs('daftar_role')">
-                        {{ __('Daftar Role') }}
+                        {{ __('Role') }}
                     </x-nav-link>
+                </div> --}}
+
+                {{-- @foreach ($collection as $item) --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link-parent :href="'#'" :active="request()->routeIs('daftar_role')">
+                        <x-slot name="name">Menu</x-slot>
+
+
+                       
+                        <x-slot name="children">
+                            {{-- @foreach ($collection as $item) --}}
+                            <a href="">Item A</a>
+                            <span class="separator"></span>
+                            <a href="#">Item B</a>
+                            <a href="#">Item C</a>
+                            <span class="separator"></span>
+                            <a href="#">Item D</a>
+                            {{-- @endforeach --}}
+                        </x-slot>
+                       
+
+
+
+                    </x-nav-link-parent>
                 </div>
+                {{-- @endforeach --}}
+
+
             </div>
+
+            
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -59,6 +119,8 @@
                 </x-dropdown>
             </div>
 
+            
+
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -77,7 +139,29 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('daftar_barang')" :active="request()->routeIs('daftar_barang')">
+                {{ __('Barang') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('daftar_role')" :active="request()->routeIs('daftar_role')">
+                {{ __('Role') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
+                <x-slot name="name">Padrón</x-slot>
+                <x-slot name="children">
+                    <a href="#">Buscador</a>
+                    <span class="separator"></span>
+                    <a href="#">Centros de votacion</a>
+                    <a href="#">Juntas</a>
+                    <span class="separator"></span>
+                    <a href="#">Cartografia</a>
+                </x-slot>
+            </x-responsive-nav-link-parent>
         </div>
+
+        
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

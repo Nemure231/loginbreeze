@@ -48,5 +48,10 @@ Route::post('/role', [RoleController:: class, 'store']);
 Route::put('/role/{role}', [RoleController::class, 'update']);
 Route::delete('/role/{role}', [RoleController::class, 'destroy']);
 
+Route::get('/menu', [MenuController::class, 'index'])->name('daftar_menu');
+Route::post('/menu', [MenuController:: class, 'store']);
+Route::put('/menu/{menu}', [MenuController::class, 'update']);
+Route::delete('/menu/{menu}', [MenuController::class, 'destroy']);
+
 
 });
