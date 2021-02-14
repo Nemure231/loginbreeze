@@ -18,7 +18,7 @@ function ready(fn) {
 
 ready(function () {
   //Memanggil fungsi datatable
-  const dataTable = new simpleDatatables.DataTable("#tabel-role", {
+  const dataTable = new simpleDatatables.DataTable("#tabel-menu", {
     searchable: true,
     fixedHeight: true,
 
@@ -49,12 +49,12 @@ ready(function () {
       var e1ModalEdit = document.getElementById('modal-edit');
       e1ModalEdit.addEventListener('shown.bs.modal', function (e) {
 
-        document.getElementById('e-nama-role').value = element.dataset.nama_role;
-        document.getElementById('form-edit').setAttribute("action", "/role/" + element.dataset.id_role);
+        document.getElementById('e-nama-menu').value = element.dataset.nama_menu;
+        document.getElementById('form-edit').setAttribute("action", "/menu/" + element.dataset.id_menu);
         ///fungsi menyimpan data terakhir di local browser
-        var id_role = element.dataset.id_role;
+        var id_menu = element.dataset.id_menu;
        
-        localStorage.setItem("simpan_id_role", id_role);
+        localStorage.setItem("simpan_id_menu", id_menu);
       });
     });
 
@@ -75,15 +75,15 @@ ready(function () {
       var e1ModalHapus = document.getElementById('modal-hapus');
       e1ModalHapus.addEventListener('shown.bs.modal', function (e) {
 
-        document.getElementById('form-hapus').setAttribute("action", "/role/" + element.dataset.id_role);
+        document.getElementById('form-hapus').setAttribute("action", "/menu/" + element.dataset.id_menu);
 
       });
     });
   });
 
   
-  var tambah = document.getElementById('pesan-validasi-role').innerHTML;
-  var edit = document.getElementById('pesan-validasi-edit-role').innerHTML;
+  var tambah = document.getElementById('pesan-validasi-menu').innerHTML;
+  var edit = document.getElementById('pesan-validasi-edit-menu').innerHTML;
 
   ///logika 1: jika pada pesan validasi hanya tampil '0    ' maka munculkan sesuai jenis modal
 
@@ -98,14 +98,14 @@ ready(function () {
 
   var modalEdit = document.getElementById('modal-edit');
    //fungsi mengambil file yang tersimpan di local browser
-  var id_role = localStorage.getItem("simpan_id_role");
+  var id_menu = localStorage.getItem("simpan_id_menu");
   // var satuan = localStorage.getItem("simpan_satuan_id");
   // var merek = localStorage.getItem("simpan_merek_id");
 
   ///event jika: modal pada logika  1 aktif maka ubah atribut action dengan menggambil id_barang di penyimpanan local
   modalEdit.addEventListener('shown.bs.modal', function (event) {
 
-    document.getElementById('form-edit').setAttribute("action", "/role/" + id_role);
+    document.getElementById('form-edit').setAttribute("action", "/menu/" + id_menu);
 
     //document.getElementById('e_satuan_id').value = satuan;
     // document.getElementById('e_merek_id').value = merek;

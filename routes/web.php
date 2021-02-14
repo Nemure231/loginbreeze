@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::get('/dashboard', function () {
 
 ///Crud Barang///////////
 Route::get('/barang', [BarangController::class, 'index'])->name('daftar_barang');
-Route::post('/barang', [BarangController:: class, 'store']);
+Route::post('/barang', [BarangController::class, 'store']);
 Route::put('/barang/{barang}', [BarangController::class, 'update']);
 Route::delete('/barang/{barang}', [BarangController::class, 'destroy']);
 Route::get('/barang/export', [BarangController::class, 'export']);
@@ -48,8 +49,10 @@ Route::post('/role', [RoleController:: class, 'store']);
 Route::put('/role/{role}', [RoleController::class, 'update']);
 Route::delete('/role/{role}', [RoleController::class, 'destroy']);
 
+
+////////menu/////////////
 Route::get('/menu', [MenuController::class, 'index'])->name('daftar_menu');
-Route::post('/menu', [MenuController:: class, 'store']);
+Route::post('/menu', [MenuController::class, 'store']);
 Route::put('/menu/{menu}', [MenuController::class, 'update']);
 Route::delete('/menu/{menu}', [MenuController::class, 'destroy']);
 
