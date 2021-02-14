@@ -58,10 +58,10 @@ Route::put('/menu/{menu}', [MenuController::class, 'update']);
 Route::delete('/menu/{menu}', [MenuController::class, 'destroy']);
 
 ////////menu/////////////
-Route::get('/menu', [SubmenuController::class, 'index'])->name('daftar_submenu');
-Route::post('/menu', [SubmenuController::class, 'store']);
-Route::put('/menu/{menu}', [SubmenuController::class, 'update']);
-Route::delete('/menu/{menu}', [SubmenuController::class, 'destroy']);
+Route::get('/menu/submenu', [SubmenuController::class, 'index'])->name('daftar_submenu');
+Route::post('/menu/submenu', [SubmenuController::class, 'store']);
+Route::put('/menu/submenu/{submenu}', [SubmenuController::class, 'update']);
+Route::delete('/menu/submenu/{submenu}', [SubmenuController::class, 'destroy']);
 
 
 });

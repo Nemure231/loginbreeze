@@ -36,8 +36,8 @@ class ValidasiEditBarang extends FormRequest
             'e_nama_barang.required' => 'Harus diisi!',
             'e_harga_barang.required' => 'Harus diisi!',
             'e_harga_barang.numeric' => 'Harus angka!',
-            'e_satuan_id.required' => 'Harus diisi',
-            'e_merek_id.required' => 'Harus diisi!'
+            'e_satuan_id.required' => 'Harus dipilih',
+            'e_merek_id.required' => 'Harus dipilih!'
         ];
     }
 }

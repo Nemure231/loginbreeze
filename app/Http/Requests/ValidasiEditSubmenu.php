@@ -27,7 +27,7 @@ class ValidasiEditSubmenu extends FormRequest
             'e_menu_id' => 'required',
             'e_nama_submenu' => 'required',
             'e_route_submenu' => 'required',
-            'e_link_submenu' => 'required'
+            'e_url_submenu' => 'required'
             
         ];
     }
@@ -35,10 +35,10 @@ class ValidasiEditSubmenu extends FormRequest
 
     public function messages(){
         return [
-            'e_menu_id.required' => 'Harus diisi!',
+            'e_menu_id.required' => 'Harus dipilih!',
             'e_nama_submenu.required' => 'Harus diisi!',
             'e_route_submenu.required' => 'Harus diisi!',
-            'e_link_submenu.required' => 'Harus diisi!'
+            'e_url_submenu.required' => 'Harus diisi!'
         ];
     }
 }

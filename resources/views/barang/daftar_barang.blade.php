@@ -142,20 +142,6 @@
               @error('e_merek_id'){{$message}}@enderror</div>
 
 
-            {{-- @if ($errors->any())
-            <div class="invisible">
-              <ul>
-                @foreach ($errors->all() as $error)
-                <li id="pesan_validasi_edit_barang">{{ $error }}</li>
-                @endforeach
-              </ul>
-            </div>
-            @endif --}}
-
-
-
-
-
 
             {{-- Modal Tambah --}}
 
