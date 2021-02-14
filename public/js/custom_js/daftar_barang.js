@@ -128,6 +128,7 @@ ready(function () {
     for (var i = 0; i < validasiBorder.length; i++) {
       validasiBorder[i].classList.remove("is-invalid");
     }
+    
     validasiText.remove("invalid-feedback");
 
 

@@ -47,16 +47,13 @@
                     <input type="file" name="excel_barang" class="form-control"
                       placeholder="Recipient's username" aria-label="Recipient's username"
                       aria-describedby="button-addon2">
-                      
-                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Import Excel</button>
+                                              <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Import Excel</button>
                        
-                        
-      
-
+              
                   </div>
                   <div class="text-danger">
 
-                    @error('nama_barang')
+                    @error('excel_barang')
                     {{ $message }}
                     @enderror
 
@@ -181,14 +178,7 @@
                           <input type="text" value="{{old('nama_barang')}}"
                             class="form-control @error('nama_barang') is-invalid @enderror" id="nama_barang"
                             name="nama_barang">
-                          <div class="invalid-feedback">
-
-                            @error('nama_barang')
-                            {{ $message }}
-                            @enderror
-
-
-                          </div>
+                            <x-pesan-validasi-satuan name="nama_barang"/>
 
 
 
@@ -198,14 +188,7 @@
                           <input type="text" value="{{old('harga_barang')}}"
                             class="form-control @error('harga_barang') is-invalid @enderror" id="harga_barang"
                             name="harga_barang">
-                          <div class="invalid-feedback">
-
-                            @error('harga_barang')
-                            {{ $message }}
-                            @enderror
-
-
-                          </div>
+                            <x-pesan-validasi-satuan name="harga_barang"/>
 
 
 
@@ -222,14 +205,7 @@
                               {{$s['nama_satuan']}}</option>
                             @endforeach
                           </select>
-                          <div class="invalid-feedback">
-
-                            @error('satuan_id')
-                            {{ $message }}
-                            @enderror
-
-
-                          </div>
+                          <x-pesan-validasi-satuan name="satuan_id"/>
 
 
 
@@ -249,14 +225,7 @@
 
                           </select>
 
-                          <div class="invalid-feedback">
-
-                            @error('merek_id')
-                            {{ $message }}
-                            @enderror
-
-
-                          </div>
+                          <x-pesan-validasi-satuan name="merek_id"/>
 
 
                         </div>
