@@ -101,7 +101,7 @@ ready(function () {
 
   var modalEdit = document.getElementById('modal-edit');
    //fungsi mengambil file yang tersimpan di local browser
-  var id_menu = localStorage.getItem("simpan_id_submenu");
+  var id_submenu = localStorage.getItem("simpan_id_submenu");
   // var satuan = localStorage.getItem("simpan_satuan_id");
   // var merek = localStorage.getItem("simpan_merek_id");
 
@@ -113,7 +113,7 @@ ready(function () {
     //document.getElementById('e_satuan_id').value = satuan;
     // document.getElementById('e_merek_id').value = merek;
 
-
+ 
   });
   var validasiText = document.getElementById('hapus-validasi');
   var validasiBorder = document.getElementsByClassName('hapus-validasi-border');

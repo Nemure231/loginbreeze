@@ -24,7 +24,7 @@ class ValidasiBarang extends FormRequest
     public function rules()
     {
         return [
-            'nama_barang' => 'required',
+            'nama_barang' => 'required|unique:barang',
             'harga_barang' => 'required|numeric',
             'merek_id' => 'required',
             'satuan_id' => 'required'
@@ -35,6 +35,7 @@ class ValidasiBarang extends FormRequest
     public function messages(){
         return [
             'nama_barang.required' => 'Harus diisi!',
+            'nama_barang.unique' => 'Nama itu sudah ada!',
             'harga_barang.required' => 'Harus diisi!',
             'harga_barang.numeric' => 'Harus angka!',
             'satuan_id.required' => 'Harus dipilih',

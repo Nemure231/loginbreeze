@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidasiSubmenu;
-use App\Http\Requests\ValidasiEditSubmenu;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Model_submenu;
 use App\Models\Model_menu;
 
@@ -87,18 +87,53 @@ class SubmenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidasiEditSubmenu $request, Model_submenu $submenu)
+    public function update(Request $request, Model_submenu $submenu)
     {
-       
-        
-        // $request->validate([
-        //     'e_menu_id' => 'required',
-        //     'e_nama_submenu' => 'required',
-        //     'e_route_submenu' => 'required',
-        //     'e_url_submenu' => 'required'
-        // ]);
+        /////setelah tanda panah ini diambilnya name inputannya
+        $nama_lama = $submenu->nama_submenu;
+        $nama_baru = $request->e_nama_submenu;
+        $aturan_nama = 'required|unique:submenu,nama_submenu';
+        ///////////Validasi Route UNique/////////////
 
-        $validated = $request->validated();
+        $route_lama = $submenu->route_submenu;
+        $route_baru = $request->e_route_submenu;
+        $aturan_route = 'required|unique:submenu,route_submenu';
+
+        ///////////////Validasi Url Unique////////////
+        $url_lama = $submenu->url_submenu;
+        $url_baru = $request->e_url_submenu;
+        $aturan_url = 'required|unique:submenu,url_submenu';
+
+        // dd([$nama_lama, $nama_baru]);
+
+        if($nama_baru == $nama_lama){
+            $aturan_nama = 'required';
+        }
+
+        if($route_baru == $route_lama){
+            $aturan_route = 'required';
+        }
+
+        if($url_baru == $url_lama){
+            $aturan_url = 'required';
+        }
+       
+        Validator::make($request->all(), [
+            'e_menu_id' => 'required',
+            'e_nama_submenu' => $aturan_nama,
+            'e_route_submenu' => $aturan_route,
+            'e_url_submenu' => $aturan_url,
+        ],[
+
+            'e_menu_id.required' => 'Harus dipilih!',
+            'e_nama_submenu.required' => 'Harus diisi!',
+            'e_nama_submenu.unique' => 'Nama itu sudah ada',
+            'e_route_submenu.required' => 'Harus diisi!',
+            'e_route_submenu.unique' => 'ROute itu sudah ada!',
+            'e_url_submenu.required' => 'Harus diisi!',
+            'e_url_submenu.unique' => 'Url itu sudah ada!'
+
+        ])->validate();
         
         Model_submenu::where('id_submenu', $submenu->id_submenu)
                     ->update([
@@ -109,7 +144,6 @@ class SubmenuController extends Controller
                         'url_submenu' => $request->e_url_submenu
              
                     ]);
-        // dd($barang->id_barang);
                         
         return redirect('menu/submenu')->with('pesan_submenu', 'Data submenu berhasil diedit!');
     }

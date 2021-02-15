@@ -79,8 +79,8 @@
             <div class="invisible" id="pesan-validasi-submenu">0
               @error('nama_submenu'){{$message}}@enderror
               @error('menu_id'){{$message}}@enderror
-              @error('route_menu'){{$message}}@enderror
-              @error('url_menu'){{$message}}@enderror
+              @error('route_submenu'){{$message}}@enderror
+              @error('url_submenu'){{$message}}@enderror
             
             </div>
 
@@ -88,8 +88,8 @@
             <div class="invisible" id="pesan-validasi-edit-submenu">0
               @error('e_nama_submenu'){{$message}}@enderror
               @error('e_menu_id'){{$message}}@enderror
-              @error('e_route_menu'){{$message}}@enderror
-              @error('e_url_menu'){{$message}}@enderror
+              @error('e_route_submenu'){{$message}}@enderror
+              @error('e_url_submenu'){{$message}}@enderror
             
             </div>
 

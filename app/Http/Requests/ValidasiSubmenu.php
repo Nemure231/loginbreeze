@@ -25,9 +25,9 @@ class ValidasiSubmenu extends FormRequest
     {
         return [
             'menu_id' => 'required',
-            'nama_submenu' => 'required',
-            'route_submenu' => 'required',
-            'url_submenu' => 'required'
+            'nama_submenu' => 'required|unique:submenu',
+            'route_submenu' => 'required|unique:submenu',
+            'url_submenu' => 'required|unique:submenu'
             
         ];
     }
@@ -37,8 +37,11 @@ class ValidasiSubmenu extends FormRequest
         return [
             'menu_id.required' => 'Harus dipilih!',
             'nama_submenu.required' => 'Harus diisi!',
+            'nama_submenu.unique' => 'Nama itu sudah ada!',
             'route_submenu.required' => 'Harus diisi!',
-            'url_submenu.required' => 'Harus diisi!'
+            'route_submenu.unique' => 'Route itu sudah ada!',
+            'url_submenu.required' => 'Harus diisi!',
+            'url_submenu.unique' => 'Url itu sudah ada!'
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ValidasiMenu;
 use App\Http\Requests\ValidasiEditMenu;
 use App\Models\Model_menu;
@@ -81,9 +82,27 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidasiEditMenu $request, Model_menu $menu)
+    public function update(Request $request, Model_menu $menu)
     {
-        $validated = $request->validated();
+        ///////////////Validasi Menu Unique////////////
+        $nama_lama = $menu->nama_menu;
+        $nama_baru = $request->e_nama_menu;
+        $aturan_nama = 'required|unique:menu,nama_menu';
+
+        // dd([$nama_lama, $nama_baru]);
+
+        if($nama_baru == $nama_lama){
+            $aturan_nama = 'required';
+        }
+
+        Validator::make($request->all(), [
+            'e_nama_menu' => $aturan_nama
+        ],[
+
+            'e_nama_menu.required' => 'Harus dipilih!',
+            'e_nama_menu.unique' => 'Nama itu sudah ada!'
+
+        ])->validate();
         
         Model_menu::where('id_menu', $menu->id_menu)
                     ->update([

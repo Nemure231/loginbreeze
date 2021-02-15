@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ValidasiRole;
 use App\Http\Requests\ValidasiEditRole;
 use App\Models\Model_role;
@@ -81,9 +82,27 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidasiEditRole $request, Model_role $role)
+    public function update(Request $request, Model_role $role)
     {
-        $validated = $request->validated();
+         ///////////////Validasi Role Unique////////////
+         $nama_lama = $role->nama_role;
+         $nama_baru = $request->e_nama_role;
+         $aturan_nama = 'required|unique:role,nama_role';
+ 
+         // dd([$nama_lama, $nama_baru]);
+ 
+         if($nama_baru == $nama_lama){
+             $aturan_nama = 'required';
+         }
+ 
+         Validator::make($request->all(), [
+             'e_nama_role' => $aturan_nama
+         ],[
+ 
+             'e_nama_role.required' => 'Harus dipilih!',
+             'e_nama_role.unique' => 'Nama itu sudah ada!'
+ 
+         ])->validate();
         
         Model_role::where('id_role', $role->id_role)
                     ->update([

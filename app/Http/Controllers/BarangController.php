@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\ValidasiBarang;
-use App\Http\Requests\ValidasiEditBarang;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ValidasiExcelBarang;
 use App\Models\Model_barang;
 use App\Models\Model_satuan;
@@ -106,9 +106,30 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidasiEditBarang $request, Model_barang $barang)
+    public function update(Request $request, Model_barang $barang)
     {
-        $validated = $request->validated();
+        $nama_lama = $barang->nama_barang;
+        $nama_baru = $request->e_nama_barang;
+        $aturan_nama = 'required|unique:barang,nama_barang';
+
+        if($nama_baru == $nama_lama){
+            $aturan_nama = 'required';
+        }
+
+        Validator::make($request->all(), [
+            'e_nama_barang' => $aturan_nama,
+            'e_harga_barang' => 'required|numeric',
+            'e_merek_id' => 'required',
+            'e_satuan_id' => 'required'
+        ],[
+
+            'e_nama_barang.required' => 'Harus diisi!',
+            'e_nama_barang.unique' => 'Nama itu sudah ada!',
+            'e_harga_barang.required' => 'Harus diisi!',
+            'e_harga_barang.numeric' => 'Harus angka!',
+            'e_satuan_id.required' => 'Harus dipilih',
+            'e_merek_id.required' => 'Harus dipilih!'
+        ])->validate();
         
         Model_barang::where('id_barang', $barang->id_barang)
                     ->update([
