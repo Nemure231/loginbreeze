@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use Illuminate\Http\Request;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubmenuController;
+use App\Http\Controllers\AksesmenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +64,19 @@ Route::get('/menu/submenu', [SubmenuController::class, 'index'])->name('daftar_s
 Route::post('/menu/submenu', [SubmenuController::class, 'store']);
 Route::put('/menu/submenu/{submenu}', [SubmenuController::class, 'update']);
 Route::delete('/menu/submenu/{submenu}', [SubmenuController::class, 'destroy']);
+
+
+//////////////////akses menu//////////////
+Route::get('/role/role_akses/{role_akses}', [AksesmenuController::class, 'edit']);
+Route::put('/role/role_akses/ajax', [AksesmenuController::class, 'update']);
+
+// Route::get('/token', function (Request $request) {
+//     $token = $request->session()->token();
+
+//     $token = csrf_token();
+
+//     // ...
+// });
 
 
 });

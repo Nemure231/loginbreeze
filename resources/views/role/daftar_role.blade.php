@@ -55,6 +55,10 @@
                       Hapus
                     </button>
 
+                    <a href="{{url('/role/role_akses')}}/{{$r['id_role']}}" class="btn btn-danger tombol-primary" data-id_role="{{$r['id_role']}}">
+                      Hapus
+                    </a>
+
                   </td>
 
                 </tr>
