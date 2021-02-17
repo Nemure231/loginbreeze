@@ -2,6 +2,7 @@
 
 use App\Models\Model_akses_menu;
 use App\Models\Model_menu;
+use App\Models\Model_submenu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
     
@@ -50,6 +51,30 @@ use Illuminate\Http\Request;
             // }
     
     
+        }
+
+        function ambil_menu(){
+
+            $role = Auth::user()->role_id;
+
+            $menu = Model_menu::join('akses_menu', 'menu.id_menu', '=', 'akses_menu.menu_id')
+                        ->where('akses_menu.role_id', $role)
+                        ->orderBy('akses_menu.menu_id', 'asc')
+                        ->orderBy('akses_menu.role_id', 'asc')
+                        ->select('id_menu', 'nama_menu')
+                        ->get();
+            return $menu;
+        }
+
+        function ambil_submenu($id_menu){
+            $submenu =  Model_submenu::join('menu', 'submenu.menu_id', '=', 'menu.id_menu')
+            ->where('submenu.menu_id', $id_menu)
+                        ->where('submenu.status_submenu', 1)
+                        ->select('nama_submenu', 'id_submenu', 'url_submenu', 'route_submenu')
+                        ->get();
+
+            return $submenu;
+            
         }
 
 

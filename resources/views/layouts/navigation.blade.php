@@ -59,22 +59,20 @@
                     </x-nav-link>
                 </div> --}}
 
-                {{-- @foreach ($collection as $item) --}}
+                @php $semua_menu = ambil_menu(); @endphp
+
+                @foreach ($semua_menu as $sm)
+                @php $id_menu = $sm['id_menu'];     @endphp
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link-parent :href="'#'" :active="request()->routeIs('daftar_role')">
-                        <x-slot name="name">Menu</x-slot>
+                        <x-slot name="name">{{$sm['nama_menu']}}</x-slot>
 
-
-                       
                         <x-slot name="children">
-                            {{-- @foreach ($collection as $item) --}}
-                            <a href="">Item A</a>
-                            <span class="separator"></span>
-                            <a href="#">Item B</a>
-                            <a href="#">Item C</a>
-                            <span class="separator"></span>
-                            <a href="#">Item D</a>
-                            {{-- @endforeach --}}
+                            @php $semua_submenu = ambil_submenu($id_menu); @endphp
+                            @foreach ($semua_submenu as $ss)
+                            <a href="{{$ss['url_submenu']}}">{{$ss['nama_submenu']}}</a>
+                            {{-- <span class="separator"></span> --}}
+                            @endforeach
                         </x-slot>
                        
 
@@ -82,7 +80,7 @@
 
                     </x-nav-link-parent>
                 </div>
-                {{-- @endforeach --}}
+                @endforeach
 
 
             </div>
