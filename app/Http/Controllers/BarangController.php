@@ -23,6 +23,12 @@ class BarangController extends Controller
      */
     public function index()
     {
+        $akses = is_logged_in();
+
+        if ($akses <= 0) {
+            return redirect('/role');           
+        }
+
         $barang =  Model_barang::join('satuan', 'barang.satuan_id', '=', 'satuan.id_satuan')
                                 ->join('merek', 'barang.merek_id', '=', 'merek.id_merek')
                                 ->select('id_barang', 'nama_barang', 'satuan_id', 'merek_id', 'harga_barang', 'nama_satuan', 'nama_merek')
@@ -32,7 +38,7 @@ class BarangController extends Controller
         $merek =  Model_merek::select('id_merek', 'nama_merek')
                                 ->get();
 
-        //dd($merek);
+        // dd($meg);
 
         return view('barang/daftar_barang',
             ['barang' => $barang, 'merek' => $merek, 'satuan' => $satuan]

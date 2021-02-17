@@ -59,21 +59,24 @@ class AksesmenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Model_akses_menu $role_akses)
+    public function edit(Request $request)
     {
-        $role_id = $role_akses->id_akses_menu;
-        
+
+        // $role_id = $role_akses->role_id;
+
+        // dd($role_id);
+
+        $role_id = $request->segment(3);
         $role = Auth::user()->role_id;
 
         $rolenmenu= Model_menu::select('id_menu', 'nama_menu')
-                    ->where('id_menu', '>', 1)
+                    // ->where('id_menu', '>', 1)
                     ->where('nama_menu', '!=', 'Role')
                     ->get();
         $id_role =  Model_role::select('id_role')
                     ->where('id_role', $role_id)
+                    // ->take(1)->get();
                     ->first();
-        // return dd($id_role);
-
         return view('role_akses/daftar_role_akses',['role_n_menu'=> $rolenmenu, 'id_role' => $id_role]);
     }
 
