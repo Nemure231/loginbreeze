@@ -17,7 +17,7 @@ class SubmenuController extends Controller
      */
     public function index(){
         $submenu =  Model_submenu::join('menu', 'submenu.menu_id', '=', 'menu.id_menu')
-                                ->select('id_submenu', 'menu_id','nama_submenu', 'url_submenu', 'nama_menu')
+                                ->select('id_submenu', 'status_submenu' ,'menu_id','nama_submenu', 'url_submenu', 'nama_menu')
                                 // ->select('route_submenu')
                                 ->get();
         $menu =     Model_menu::select('id_menu', 'nama_menu')
@@ -46,17 +46,20 @@ class SubmenuController extends Controller
      */
     public function store(ValidasiSubmenu $request)
     {
+
+        // dd($request->status_submenu);
         $validated = $request->validated();
 
         Model_submenu::create([
             'menu_id' => $request->menu_id,
-           'nama_submenu' => $request->nama_submenu,
-           'route_submenu' => $request->route_submenu,
-           'url_submenu' => $request->url_submenu
+            'nama_submenu' => $request->nama_submenu,
+        //    'route_submenu' => $request->route_submenu,
+            'url_submenu' => $request->url_submenu,
+            'status_submenu' => $request->status_submenu
 
-       ]);
-       return redirect('menu/submenu')
-       ->with('pesan_submenu', 'Data submenu berhasil ditambahkan!');
+        ]);
+        return redirect('menu/submenu')
+        ->with('pesan_submenu', 'Data submenu berhasil ditambahkan!');
     }
 
     /**
@@ -142,7 +145,8 @@ class SubmenuController extends Controller
                         'menu_id' => $request->e_menu_id,
                         'nama_submenu' => $request->e_nama_submenu,
                         // 'route_submenu' => $request->e_route_submenu,
-                        'url_submenu' => $request->e_url_submenu
+                        'url_submenu' => $request->e_url_submenu,
+                        'status_submenu' => $request->e_status_submenu
              
                     ]);
                         

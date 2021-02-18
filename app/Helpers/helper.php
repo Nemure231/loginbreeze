@@ -61,7 +61,7 @@ use Illuminate\Http\Request;
                         ->where('akses_menu.role_id', $role)
                         ->orderBy('akses_menu.menu_id', 'asc')
                         ->orderBy('akses_menu.role_id', 'asc')
-                        ->select('id_menu', 'nama_menu', 'route_menu')
+                        ->select('id_menu', 'nama_menu')
                         ->get();
             return $menu;
         }

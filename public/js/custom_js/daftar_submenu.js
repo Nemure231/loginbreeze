@@ -33,10 +33,26 @@ ready(function () {
 ready(function () {
 
 
+
+  /////////Modal open
   document.getElementById('tombol-tambah').addEventListener('click', function () {
     new bootstrap.Modal(document.getElementById('modal-tambah')).show();
-  });
 
+  });
+  //////////////////Cek status submenu//////////////////
+
+  // document.getElementById('status-submenu').addEventListener('click', function () {
+
+  //   var cekStatus = this.checked;
+
+  //   if(cekStatus == true){
+  //        document.getElementById('status-submenu').value = 1;
+  //   }
+  //   if(cekStatus == false){
+  //     document.getElementById('status-submenu').value = 2;
+  //   }
+
+  // });
 
   /////////////////EDIT///////////////////
 
@@ -51,17 +67,46 @@ ready(function () {
 
         document.getElementById('e-menu-id').value = element.dataset.menu_id;
         document.getElementById('e-nama-submenu').value = element.dataset.nama_submenu;
-        document.getElementById('e-route-submenu').value = element.dataset.route_submenu;
         document.getElementById('e-url-submenu').value = element.dataset.url_submenu;
         document.getElementById('form-edit').setAttribute("action", "/menu/submenu/" + element.dataset.id_submenu);
-        ///fungsi menyimpan data terakhir di local browser
-        var id_submenu = element.dataset.id_submenu;
-       
-        localStorage.setItem("simpan_id_submenu", id_submenu);
+
+        var status = element.dataset.status_submenu;
+
+        if (status == 1) {
+          document.getElementById('e-status-submenu').checked = true;
+          document.getElementById('e-status-submenu').value = 1;
+        } else {
+          document.getElementById('e-status-submenu').checked = false;
+          document.getElementById('e-status-submenu').value = 2;
+        }
+
+         ///fungsi menyimpan data terakhir di local browser
+         var id_submenu = element.dataset.id_submenu;
+         var menu_id = element.dataset.menu_id;
+ 
+         localStorage.setItem("simpan_id_submenu", id_submenu);
+         localStorage.setItem("simpan_menu_id", menu_id);
+         localStorage.setItem("simpan_status_submenu", status);
+
       });
     });
 
 
+
+  });
+
+  ///////////Event checkbox model edit///////////////
+
+  document.getElementById('e-status-submenu').addEventListener('click', function () {
+
+    var cekCheckBoxModalEdit = this.checked;
+
+    if (cekCheckBoxModalEdit == true) {
+      document.getElementById('e-status-submenu').value = 1;
+    }
+    if (cekCheckBoxModalEdit == false) {
+      document.getElementById('e-status-submenu').value = 2;
+    }
 
   });
 
@@ -84,7 +129,7 @@ ready(function () {
     });
   });
 
-  
+
   var tambah = document.getElementById('pesan-validasi-submenu').innerHTML;
   var edit = document.getElementById('pesan-validasi-edit-submenu').innerHTML;
 
@@ -100,20 +145,25 @@ ready(function () {
 
 
   var modalEdit = document.getElementById('modal-edit');
-   //fungsi mengambil file yang tersimpan di local browser
-  var id_submenu = localStorage.getItem("simpan_id_submenu");
-  // var satuan = localStorage.getItem("simpan_satuan_id");
-  // var merek = localStorage.getItem("simpan_merek_id");
-
+  //fungsi mengambil file yang tersimpan di local browser
+  var ambilIdMenu = localStorage.getItem("simpan_id_submenu");
+  var ambilMenuId = localStorage.getItem("simpan_menu_id");
+  var ambilStatusSubmenu = localStorage.getItem("simpan_status_submenu");
   ///event jika: modal pada logika  1 aktif maka ubah atribut action dengan menggambil id_barang di penyimpanan local
   modalEdit.addEventListener('shown.bs.modal', function (event) {
 
-    document.getElementById('form-edit').setAttribute("action", "/menu/submenu/" + id_submenu);
+    document.getElementById('form-edit').setAttribute("action", "/menu/submenu/" + ambilIdMenu);
+    document.getElementById('e-menu-id').value = ambilMenuId;
 
-    //document.getElementById('e_satuan_id').value = satuan;
-    // document.getElementById('e_merek_id').value = merek;
+    // if (ambilStatusSubmenu == 1) {
+    //   // document.getElementById('e-status-submenu').checked = true;
+    //   document.getElementById('e-status-submenu').value = 1;
+    // } else {
+    //   // document.getElementById('e-status-submenu').checked = false;
+    //   document.getElementById('e-status-submenu').value = 2;
+    // }
 
- 
+
   });
   var validasiText = document.getElementById('hapus-validasi');
   var validasiBorder = document.getElementsByClassName('hapus-validasi-border');

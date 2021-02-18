@@ -37,6 +37,7 @@
                   <th scope="col">Menu</th>
                   {{-- <th scope="col">Route</th> --}}
                   <th scope="col">Link</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Opsi</th>
                 </tr>
               </thead>
@@ -52,12 +53,22 @@
                   <td>{{$sm['url_submenu']}}</td>
                   <td>
 
+                    @if ($sm['status_submenu'] == 1)
+                    <span class="badge rounded-pill bg-success">Aktif</span>
+                    @else
+                    <span class="badge rounded-pill bg-danger">Tidak AKtif</span>
+                    @endif
+
+                  </td>
+                  <td>
+
 
                     <button type="button" class="btn btn-warning tombol-edit" data-nama_submenu="{{$sm['nama_submenu']}}"
                       data-id_submenu="{{$sm['id_submenu']}}"
                       {{-- data-route_submenu="{{$sm['route_submenu']}}" --}}
                       data-url_submenu="{{$sm['url_submenu']}}"
                       data-menu_id="{{$sm['menu_id']}}"
+                      data-status_submenu="{{$sm['status_submenu']}}"
                       
               
                       >
@@ -132,7 +143,7 @@
                               <option selected value="">--Pilih--</option>
 
                               @foreach($menu as $m)
-                              <option value={{$m['id_menu']}} {{(old('merek_id')==$m['id_menu']?'selected':'')}}>
+                              <option value={{$m['id_menu']}} {{(old('menu_id')==$m['id_menu']?'selected':'')}}>
                                 {{$m['nama_menu']}}</option>
                               @endforeach
 
@@ -165,7 +176,7 @@
                         </div> --}}
 
 
-                        <div class="col-lg-12 mb-3">
+                        <div class="col-lg-6 mb-3">
                           <label>Url</label>
                             <input type="text" value="{{old('url_submenu')}}" class="form-control @error('url_submenu') is-invalid @enderror" id="url-submenu" name="url_submenu">
                             <div class="invalid-feedback">
@@ -176,10 +187,20 @@
                              
                             
                             </div>
-                          
-                       
-                         
                         </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <div class="form-check">
+                            <input class="form-check-input" name="status_submenu" type="hidden" value="2">
+                            <input class="form-check-input" id="status-submenu" name="status_submenu" type="checkbox" value="1" id="flexCheckDefault" checked>
+
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Aktif?
+                            </label>
+                          </div>
+                        </div>
+
+                  
                         
 
 
@@ -245,7 +266,17 @@
                                 {{$m['nama_menu']}}</option>
                               @endforeach
 
+
+
                             </select>
+                            <div class="invalid-feedback" id="hapus-validasi">
+                             
+                              @error('e_menu_id')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
                         </div>
 
                         {{-- <div class="col-lg-6 mb-3">
@@ -262,7 +293,7 @@
                           
                         </div> --}}
 
-                        <div class="col-lg-12 mb-3">
+                        <div class="col-lg-6 mb-3">
                           <label>Url</label>
                             <input type="text" name="e_url_submenu" value="{{old('e_url_submenu')}}" class="hapus-validasi-border form-control @error('e_url_submenu') is-invalid @enderror" id="e-url-submenu">
                             <div class="invalid-feedback" id="hapus-validasi">
@@ -274,6 +305,25 @@
                              
                             </div>
                           
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <div class="form-check">
+                            <input class="form-check-input" name="e_status_submenu" type="hidden" value="2">
+                            <input class="form-check-input" id="e-status-submenu" name="e_status_submenu" type="checkbox" value="{{old('e_status_submenu')}}"
+                            
+                            @if(old('e_status_submenu') == 1){
+                                {{'checked'}}
+                            @else
+                               
+                            
+                            @endif 
+                            
+                            id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Aktif?
+                            </label>
+                          </div>
                         </div>
                         
 

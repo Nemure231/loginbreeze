@@ -9,5 +9,5 @@ class Model_submenu extends Model
 {
     protected $table = 'submenu';
     protected $primaryKey = 'id_submenu';
-    protected $fillable = ['nama_submenu', 'menu_id', 'route_submenu', 'url_submenu'];
+    protected $fillable = ['nama_submenu', 'menu_id', 'route_submenu', 'url_submenu', 'status_submenu'];
 }
