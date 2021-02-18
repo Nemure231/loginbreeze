@@ -61,7 +61,7 @@ use Illuminate\Http\Request;
                         ->where('akses_menu.role_id', $role)
                         ->orderBy('akses_menu.menu_id', 'asc')
                         ->orderBy('akses_menu.role_id', 'asc')
-                        ->select('id_menu', 'nama_menu')
+                        ->select('id_menu', 'nama_menu', 'route_menu')
                         ->get();
             return $menu;
         }
@@ -70,7 +70,7 @@ use Illuminate\Http\Request;
             $submenu =  Model_submenu::join('menu', 'submenu.menu_id', '=', 'menu.id_menu')
             ->where('submenu.menu_id', $id_menu)
                         ->where('submenu.status_submenu', 1)
-                        ->select('nama_submenu', 'id_submenu', 'url_submenu', 'route_submenu')
+                        ->select('nama_submenu', 'id_submenu', 'url_submenu')
                         ->get();
 
             return $submenu;

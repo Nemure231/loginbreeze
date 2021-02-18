@@ -34,6 +34,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Nama Menu</th>
+                  <th scope="col">Route Menu</th>
                   <th scope="col">Opsi</th>
                 </tr>
               </thead>
@@ -44,11 +45,13 @@
                 <tr>
                   <th scope="row">{{$loop->iteration }}</th>
                   <td>{{$m['nama_menu']}}</td>
+                  <td>{{$m['route_menu']}}</td>
                   <td>
 
 
                     <button type="button" class="btn btn-warning tombol-edit" data-nama_menu="{{$m['nama_menu']}}"
-                      data-id_menu="{{$m['id_menu']}}">
+                      data-id_menu="{{$m['id_menu']}}"
+                      data-route_menu="{{$m['route_menu']}}">
                       Edit
                     </button>
                     <button type="button" class="btn btn-danger tombol-hapus" data-id_menu="{{$m['id_menu']}}">
@@ -75,9 +78,9 @@
             
             
             
-            <div class="invisible" id="pesan-validasi-menu">0 @error('nama_menu'){{$message}}@enderror</div>
+            <div class="invisible" id="pesan-validasi-menu">0 @error('nama_menu'){{$message}}@enderror @error('route_menu'){{$message}}@enderror</div>
 
-            <div class="invisible" id="pesan-validasi-edit-menu">0 @error('e_nama_menu'){{$message}}@enderror</div>
+            <div class="invisible" id="pesan-validasi-edit-menu">0 @error('e_nama_menu'){{$message}}@enderror  @error('e_route_menu'){{$message}}@enderror</div>
 
 
               {{-- @if ($errors->any())
@@ -117,6 +120,22 @@
                             <div class="invalid-feedback">
                              
                               @error('nama_menu')
+                            {{ $message }}
+                              @enderror
+                             
+                            
+                            </div>
+                          
+                       
+                         
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <label>Route Menu</label>
+                            <input type="text" value="{{old('route_menu')}}" class="form-control @error('route_menu') is-invalid @enderror" id="route-menu" name="route_menu">
+                            <div class="invalid-feedback">
+                             
+                              @error('route_menu')
                             {{ $message }}
                               @enderror
                              
@@ -172,6 +191,20 @@
                             <div class="invalid-feedback" id="hapus-validasi">
                              
                               @error('e_nama_menu')
+                            {{ $message }}
+                              @enderror
+                             
+                             
+                            </div>
+                          
+                        </div>
+
+                        <div class="col-lg-12 mb-3">
+                          <label>Route Menu</label>
+                            <input type="text" name="e_route_menu" value="{{old('e_route_menu')}}" class="hapus-validasi-border form-control @error('e_route_menu') is-invalid @enderror" id="e-route-menu">
+                            <div class="invalid-feedback" id="hapus-validasi">
+                             
+                              @error('e_route_menu')
                             {{ $message }}
                               @enderror
                              

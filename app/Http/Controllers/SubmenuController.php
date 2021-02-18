@@ -17,7 +17,8 @@ class SubmenuController extends Controller
      */
     public function index(){
         $submenu =  Model_submenu::join('menu', 'submenu.menu_id', '=', 'menu.id_menu')
-                                ->select('id_submenu', 'menu_id','nama_submenu', 'route_submenu', 'url_submenu', 'nama_menu')
+                                ->select('id_submenu', 'menu_id','nama_submenu', 'url_submenu', 'nama_menu')
+                                // ->select('route_submenu')
                                 ->get();
         $menu =     Model_menu::select('id_menu', 'nama_menu')
                                     ->get();
@@ -95,9 +96,9 @@ class SubmenuController extends Controller
         $aturan_nama = 'required|unique:submenu,nama_submenu';
         ///////////Validasi Route UNique/////////////
 
-        $route_lama = $submenu->route_submenu;
-        $route_baru = $request->e_route_submenu;
-        $aturan_route = 'required|unique:submenu,route_submenu';
+        // $route_lama = $submenu->route_submenu;
+        // $route_baru = $request->e_route_submenu;
+        // $aturan_route = 'required|unique:submenu,route_submenu';
 
         ///////////////Validasi Url Unique////////////
         $url_lama = $submenu->url_submenu;
@@ -110,9 +111,9 @@ class SubmenuController extends Controller
             $aturan_nama = 'required';
         }
 
-        if($route_baru == $route_lama){
-            $aturan_route = 'required';
-        }
+        // if($route_baru == $route_lama){
+        //     $aturan_route = 'required';
+        // }
 
         if($url_baru == $url_lama){
             $aturan_url = 'required';
@@ -121,15 +122,15 @@ class SubmenuController extends Controller
         Validator::make($request->all(), [
             'e_menu_id' => 'required',
             'e_nama_submenu' => $aturan_nama,
-            'e_route_submenu' => $aturan_route,
+            // 'e_route_submenu' => $aturan_route,
             'e_url_submenu' => $aturan_url,
         ],[
 
             'e_menu_id.required' => 'Harus dipilih!',
             'e_nama_submenu.required' => 'Harus diisi!',
             'e_nama_submenu.unique' => 'Nama itu sudah ada',
-            'e_route_submenu.required' => 'Harus diisi!',
-            'e_route_submenu.unique' => 'ROute itu sudah ada!',
+            // 'e_route_submenu.required' => 'Harus diisi!',
+            // 'e_route_submenu.unique' => 'ROute itu sudah ada!',
             'e_url_submenu.required' => 'Harus diisi!',
             'e_url_submenu.unique' => 'Url itu sudah ada!'
 
@@ -140,7 +141,7 @@ class SubmenuController extends Controller
                         //yang kiri dari database //dan yang kanan dari name form input
                         'menu_id' => $request->e_menu_id,
                         'nama_submenu' => $request->e_nama_submenu,
-                        'route_submenu' => $request->e_route_submenu,
+                        // 'route_submenu' => $request->e_route_submenu,
                         'url_submenu' => $request->e_url_submenu
              
                     ]);

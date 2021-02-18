@@ -35,7 +35,7 @@
                   <th scope="col">#</th>
                   <th scope="col">Nama</th>
                   <th scope="col">Menu</th>
-                  <th scope="col">Route</th>
+                  {{-- <th scope="col">Route</th> --}}
                   <th scope="col">Link</th>
                   <th scope="col">Opsi</th>
                 </tr>
@@ -48,14 +48,14 @@
                   <th scope="row">{{$loop->iteration }}</th>
                   <td>{{$sm['nama_submenu']}}</td>
                   <td>{{$sm['nama_menu']}}</td>
-                  <td>{{$sm['route_submenu']}}</td>
+                  {{-- <td>{{$sm['route_submenu']}}</td> --}}
                   <td>{{$sm['url_submenu']}}</td>
                   <td>
 
 
                     <button type="button" class="btn btn-warning tombol-edit" data-nama_submenu="{{$sm['nama_submenu']}}"
                       data-id_submenu="{{$sm['id_submenu']}}"
-                      data-route_submenu="{{$sm['route_submenu']}}"
+                      {{-- data-route_submenu="{{$sm['route_submenu']}}" --}}
                       data-url_submenu="{{$sm['url_submenu']}}"
                       data-menu_id="{{$sm['menu_id']}}"
                       
@@ -63,7 +63,8 @@
                       >
                       Edit
                     </button>
-                    <button type="button" class="btn btn-danger tombol-hapus" data-id_submenu="{{$sm['id_submenu']}}">
+                    <button type="button" class="btn btn-danger tombol-hapus" 
+                    data-id_submenu="{{$sm['id_submenu']}}">
                       Hapus
                     </button>
 
@@ -79,7 +80,7 @@
             <div class="invisible" id="pesan-validasi-submenu">0
               @error('nama_submenu'){{$message}}@enderror
               @error('menu_id'){{$message}}@enderror
-              @error('route_submenu'){{$message}}@enderror
+              {{-- @error('route_submenu'){{$message}}@enderror --}}
               @error('url_submenu'){{$message}}@enderror
             
             </div>
@@ -88,7 +89,7 @@
             <div class="invisible" id="pesan-validasi-edit-submenu">0
               @error('e_nama_submenu'){{$message}}@enderror
               @error('e_menu_id'){{$message}}@enderror
-              @error('e_route_submenu'){{$message}}@enderror
+              {{-- @error('e_route_submenu'){{$message}}@enderror --}}
               @error('e_url_submenu'){{$message}}@enderror
             
             </div>
@@ -146,7 +147,7 @@
                             </div>
                         </div>
 
-
+{{-- 
                         <div class="col-lg-6 mb-3">
                           <label>Route</label>
                             <input type="text" value="{{old('route_submenu')}}" class="form-control @error('route_submenu') is-invalid @enderror" id="route-submenu" name="route_submenu">
@@ -161,7 +162,7 @@
                           
                        
                          
-                        </div>
+                        </div> --}}
 
 
                         <div class="col-lg-12 mb-3">
@@ -247,7 +248,7 @@
                             </select>
                         </div>
 
-                        <div class="col-lg-6 mb-3">
+                        {{-- <div class="col-lg-6 mb-3">
                           <label>Route</label>
                             <input type="text" name="e_route_submenu" value="{{old('e_route_submenu')}}" class="hapus-validasi-border form-control @error('e_route_submenu') is-invalid @enderror" id="e-route-submenu">
                             <div class="invalid-feedback" id="hapus-validasi">
@@ -259,7 +260,7 @@
                              
                             </div>
                           
-                        </div>
+                        </div> --}}
 
                         <div class="col-lg-12 mb-3">
                           <label>Url</label>

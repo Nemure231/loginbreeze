@@ -24,7 +24,8 @@ class ValidasiMenu extends FormRequest
     public function rules()
     {
         return [
-            'nama_menu' => 'required|unique:menu'
+            'nama_menu' => 'required|unique:menu',
+            'route_menu' => 'required|unique:menu'
             
         ];
     }
@@ -33,7 +34,9 @@ class ValidasiMenu extends FormRequest
     public function messages(){
         return [
             'nama_menu.required' => 'Harus diisi!',
-            'nama_menu.unique' => 'Menu itu sudah ada!'
+            'nama_menu.unique' => 'Menu itu sudah ada!',
+            'route_menu.required' => 'Harus diisi!',
+            'route_menu.unique' => 'Route itu sudah ada!'
         ];
     }
 }
