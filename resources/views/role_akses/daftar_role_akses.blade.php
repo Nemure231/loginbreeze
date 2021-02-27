@@ -85,59 +85,61 @@
                 @endforeach
               </tbody>
             </table>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+            {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script> --}}
 
             <script>
 
             
             ///////////////AJAX NON JQUERY TIDAK BERHASIL KARENA VALUR MENU_ID DAN ROLENYA KOSONG ???? ANEH!//////////
-            // var val = document.getElementById('token').getAttribute('content');
-            // // alert(val);
-            // var hi = document.getElementsByClassName('form-check-input');
-            // Array.prototype.forEach.call(hi, function (element) {
-            //   element.addEventListener('click', function () {
-            //     const menuId = element.dataset.menu;
-            //     const roleId = element.dataset.role;
-            //       // console.log("menu_id="+menuId+"&"+"role_id="+roleId);
+            var val = document.getElementById('token').getAttribute('content');
+            // alert(val);
+            var hi = document.getElementsByClassName('form-check-input');
+            Array.prototype.forEach.call(hi, function (element) {
+              element.addEventListener('click', function () {
+                const menuId = element.dataset.menu;
+                const roleId = element.dataset.role;
+                  // console.log("menu_id="+menuId+"&"+"role_id="+roleId);
                 
-            //    const params =  {
-            //         menu_id: element.dataset.menu,
-            //         role_id: element.dataset.role
-            //       }
-            //     var request = new XMLHttpRequest();
-            //     request.open('PUT', '/role/role_akses/ajax', true);
-            //     request.setRequestHeader('X-CSRF-TOKEN', 'application/json';val);
-            //     request.send(JSON.stringify(params));
-            //   });
-
-            // });
-
-              ///sementara pakai ajax jquery dulu///////
-              $('.form-check-input').on('click', function () {
-
-                const menuId = $(this).data('menu');
-                const roleId = $(this).data('role');
-
-                $.ajax({
-                  url: "/role/role_akses/ajax",
-                  type: 'put',
-                  headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                  data: {
+               const params =  {
                     menu_id: menuId,
                     role_id: roleId
-                  },
-                  success: function () {
-                    //Swal.fire('Berhasil', 'Akses berhasil diubah!', 'success');
-                    document.location.href = "" + roleId;
-                    // location.reload();
-                    // return false;
                   }
-
-                });
-
+                var request = new XMLHttpRequest();
+                request.open('PUT', '/role/role_akses/ajax', true);
+                request.setRequestHeader('X-CSRF-TOKEN', val);
+                request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                request.send(JSON.stringify(params));
+                location.reload();
               });
+
+            });
+
+              ///sementara pakai ajax jquery dulu///////
+              // $('.form-check-input').on('click', function () {
+
+              //   const menuId = $(this).data('menu');
+              //   const roleId = $(this).data('role');
+
+              //   $.ajax({
+              //     url: "/role/role_akses/ajax",
+              //     type: 'put',
+              //     headers: {
+              //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              //           },
+              //     data: {
+              //       menu_id: menuId,
+              //       role_id: roleId
+              //     },
+              //     success: function () {
+              //       //Swal.fire('Berhasil', 'Akses berhasil diubah!', 'success');
+              //       document.location.href = "" + roleId;
+              //       // location.reload();
+              //       // return false;
+              //     }
+
+              //   });
+
+              // });
 
 
             </script>
