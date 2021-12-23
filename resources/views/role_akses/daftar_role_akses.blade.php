@@ -43,9 +43,9 @@
                   <td>{{$rm['nama_menu']}}</td>
                   <td>
                     <div class="form-check">
-                      {{-- <form method="post" action="/role/role_akses">
-                        @csrf
-                        @method('put') --}}
+                      {{-- <form method="post" action="/role/role_akses"> --}}
+                        <input id="token_akses_menu" type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        @method('put')
                       <input class="form-check-input" id="pencet" type="checkbox" value="" id="flexCheckDefault"
                       {{check_akses($id_role['id_role'], $rm['id_menu']) }}
                       data-role="{{ $id_role['id_role'] }}"
@@ -92,6 +92,7 @@
             
             ///////////////AJAX NON JQUERY TIDAK BERHASIL KARENA VALUR MENU_ID DAN ROLENYA KOSONG ???? ANEH!//////////
             var val = document.getElementById('token').getAttribute('content');
+            var token = document.getElementById('token_akses_menu').value;
             // alert(val);
             var hi = document.getElementsByClassName('form-check-input');
             Array.prototype.forEach.call(hi, function (element) {
@@ -106,7 +107,8 @@
                   }
                 var request = new XMLHttpRequest();
                 request.open('PUT', 'ajax', true);
-                request.setRequestHeader('X-CSRF-TOKEN', val);
+                // request.setRequestHeader("X-CSRFToken", csrftoken); 
+                request.setRequestHeader('X-CSRF-TOKEN', token);
                 request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 request.send(JSON.stringify(params));
                 // location.reload();
