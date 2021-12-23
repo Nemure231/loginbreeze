@@ -10,9 +10,11 @@ use App\Http\Requests\ValidasiExcelBarang;
 use App\Models\Model_barang;
 use App\Models\Model_satuan;
 use App\Models\Model_merek;
+use App\Models\Model_menu;
 use App\Exports\BarangExport;
 use App\Imports\BarangImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class BarangController extends Controller
 {
@@ -23,6 +25,15 @@ class BarangController extends Controller
      */
     public function index()
     {
+        $role = Auth::user()->role_id;
+
+        $menu = Model_menu::join('akses_menu', 'menu.id_menu', '=', 'akses_menu.menu_id')
+                    ->where('akses_menu.role_id', $role)
+                    ->orderBy('akses_menu.menu_id', 'asc')
+                    ->orderBy('akses_menu.role_id', 'asc')
+                    ->select('id_menu', 'nama_menu')
+                    ->get();
+                    dd($menu);
         
         $test = ambil_menu();
         dd($test);
