@@ -105,7 +105,7 @@
                     role_id: roleId
                   }
                 var request = new XMLHttpRequest();
-                request.open('PUT', 'role/role_akses/ajax', true);
+                request.open('PUT', '/role_akses/ajax', true);
                 request.setRequestHeader('X-CSRF-TOKEN', val);
                 request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 request.send(JSON.stringify(params));
