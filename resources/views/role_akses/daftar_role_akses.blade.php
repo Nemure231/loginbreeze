@@ -109,7 +109,7 @@
                 request.setRequestHeader('X-CSRF-TOKEN', val);
                 request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
                 request.send(JSON.stringify(params));
-                location.reload();
+                // location.reload();
               });
 
             });
