@@ -23,8 +23,10 @@ class BarangController extends Controller
      */
     public function index()
     {
+        
+        $test = ambil_menu();
+        dd($test);
         $akses = is_logged_in();
-
         if ($akses <= 0) {
             return redirect('/role');           
         }
