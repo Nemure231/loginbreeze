@@ -24,7 +24,7 @@ class ValidasiRole extends FormRequest
     public function rules()
     {
         return [
-            'nama_role' => 'required|unique'
+            'nama_role' => 'required|unique:role'
             
         ];
     }
