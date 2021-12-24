@@ -7,6 +7,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\AksesmenuController;
 use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\MerekController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,5 +77,13 @@ Route::get('/satuan', [SatuanController::class, 'index'])->name('daftar_satuan')
 Route::post('/satuan', [SatuanController::class, 'store']);
 Route::put('/satuan/{satuan}', [SatuanController::class, 'update']);
 Route::delete('/satuan/{satuan}', [SatuanController::class, 'destroy']);
+
+
+
+////////kategori/////////////
+Route::get('/merek', [MerekController::class, 'index'])->name('daftar_merek');
+Route::post('/merek', [MerekController::class, 'store']);
+Route::put('/merek/{merek}', [MerekController::class, 'update']);
+Route::delete('/merek/{merek}', [MerekController::class, 'destroy']);
 
 });
