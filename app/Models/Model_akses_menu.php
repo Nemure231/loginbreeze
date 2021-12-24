@@ -14,6 +14,6 @@ class Model_akses_menu extends Model
 
     public function menu()
     {
-        return $this->hasMany(Menu::class);
+        return $this->belongsTo(Model_menu::class);
     }
 }
