@@ -5,6 +5,7 @@ use App\Models\Model_menu;
 use App\Models\Model_submenu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
     
         function check_akses($role_id, $menu_id){
     
@@ -31,11 +32,12 @@ use Illuminate\Http\Request;
                 $role = Auth::user()->role_id;
                 $menu = $request->segment(1);
 
-                dd($menu);
+                $uc_menu = Str::ucfirst($menu);
+
 
     
                 $queryMenu= Model_menu::select('id_menu')
-                            ->where('nama_menu', $menu)
+                            ->where('nama_menu', $uc_menu)
                             ->first();
                             
                 $menu_id = $queryMenu['id_menu'];
