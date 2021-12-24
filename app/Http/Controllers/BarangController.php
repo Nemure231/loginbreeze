@@ -27,15 +27,11 @@ class BarangController extends Controller
     public function index()
     {
         $role = Auth::user()->role_id;
-        // $td = Model_menu::where('akses_menu.role_id', $role)
+       
+        $td = Model_akses_menu::with('menu')
+        // ->where('role_id', $role)
         // ->orderBy('akses_menu.menu_id', 'asc')
         // ->orderBy('akses_menu.role_id', 'asc')
-        // ->select('id_menu', 'nama_menu')
-        // ->get();
-        $td = Model_akses_menu::with('menu')
-        ->where('role_id', $role)  
-        ->orderBy('akses_menu.menu_id', 'asc')
-        ->orderBy('akses_menu.role_id', 'asc')
         ->get();
         dd($td);
 
