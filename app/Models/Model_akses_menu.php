@@ -11,4 +11,9 @@ class Model_akses_menu extends Model
     protected $primaryKey = 'id_akses_menu';
     protected $fillable = ['menu_id', 'role_id'];
     public $timestamps = false;
+
+    public function menu()
+    {
+        return $this->hasMany(Menu::class);
+    }
 }

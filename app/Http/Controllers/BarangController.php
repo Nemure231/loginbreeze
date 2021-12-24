@@ -11,6 +11,7 @@ use App\Models\Model_barang;
 use App\Models\Model_satuan;
 use App\Models\Model_merek;
 use App\Models\Model_menu;
+use App\Models\Model_akses_menu;
 use App\Exports\BarangExport;
 use App\Imports\BarangImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -25,6 +26,12 @@ class BarangController extends Controller
      */
     public function index()
     {
+
+        $tm = Model_akses_menu::find(1)->menu;
+        dd($tm);
+        
+
+
         $role = Auth::user()->role_id;
 
         $menu = Model_menu::join('akses_menu', 'menu.id_menu', '=', 'akses_menu.menu_id')
