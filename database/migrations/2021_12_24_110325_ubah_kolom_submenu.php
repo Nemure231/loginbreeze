@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoleTable extends Migration
+class UbahKolomSubmenu extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateRoleTable extends Migration
      */
     public function up()
     {
-        Schema::create('role', function (Blueprint $table) {
-       
-        $table->increments('id_role');
-        $table->string('nama_role', 20)->unique();
-        $table->timestamps();
-    });
+        Schema::table('submenu', function (Blueprint $table) {
+            $table->string('nama_submenu', 50)->change();
+        });
     }
 
     /**
@@ -28,6 +25,6 @@ class CreateRoleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role');
+        //
     }
 }
