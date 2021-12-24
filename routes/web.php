@@ -72,9 +72,9 @@ Route::put('/role/role_akses/ajax', [AksesmenuController::class, 'update']);
 
 
 ////////satuan/////////////
-Route::get('/satuan', [MenuController::class, 'index'])->name('daftar_satuan');
-Route::post('/satuan', [MenuController::class, 'store']);
-Route::put('/satuan/{satuan}', [MenuController::class, 'update']);
-Route::delete('/satuan/{satuan}', [MenuController::class, 'destroy']);
+Route::get('/satuan', [SatuanController::class, 'index'])->name('daftar_satuan');
+Route::post('/satuan', [SatuanController::class, 'store']);
+Route::put('/satuan/{satuan}', [SatuanController::class, 'update']);
+Route::delete('/satuan/{satuan}', [SatuanController::class, 'destroy']);
 
 });

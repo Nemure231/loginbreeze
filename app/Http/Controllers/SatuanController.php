@@ -29,18 +29,18 @@ class SatuanController extends Controller
 
         ])->validate();
 
-        Model_menu::create([
+        Model_satuan::create([
            'nama_satuan' => $request->nama_satuan,
 
        ]);
        return redirect('/satuan')
-       ->with('pesan_satuan', 'Data menu berhasil ditambahkan!');
+       ->with('pesan_satuan', 'Data satuan berhasil ditambahkan!');
     }
 
   
     public function update(Request $request, Model_satuan $satuan)
     {
-        ///////////////Validasi Menu Unique////////////
+        ///////////////Validasi satuan Unique////////////
         Validator::make($request->all(), [
             'e_nama_satuan' => 'required|unique:satuan,nama_satuan',
         ],[
@@ -50,7 +50,7 @@ class SatuanController extends Controller
           
 
         ])->validate();
-        Model_menu::where('id_satuan', $satuan->id_satuan)
+        Model_satuan::where('id_satuan', $satuan->id_satuan)
                     ->update([
                         'nama_satuan' => $request->e_nama_satuan,
                     ]);

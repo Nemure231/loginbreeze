@@ -51,7 +51,7 @@
                       data-id_satuan="{{$s['id_satuan']}}">
                       Edit
                     </button>
-                    <button type="button" class="btn btn-danger tombol-hapus" data-id_satuan="{{$m['id_satuan']}}">
+                    <button type="button" class="btn btn-danger tombol-hapus" data-id_satuan="{{$s['id_satuan']}}">
                       Hapus
                     </button>
 
