@@ -71,12 +71,10 @@ class AksesmenuController extends Controller
 
     
         $rolenmenu= Model_menu::select('id_menu', 'nama_menu')
-                    // ->where('id_menu', '>', 1)
                     ->where('id_menu', '!=', 1)
                     ->get();
         $id_role =  Model_role::select('id_role')
                     ->where('id_role', $role_id)
-                    // ->take(1)->get();
                     ->first();
         return view('role_akses/daftar_role_akses',['role_n_menu'=> $rolenmenu, 'id_role' => $id_role]);
     }

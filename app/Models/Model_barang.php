@@ -13,4 +13,5 @@ class Model_barang extends Model
     protected $table = 'barang';
     protected $primaryKey = 'id_barang';
     protected $fillable = ['nama_barang', 'satuan_id', 'merek_id', 'harga_barang'];
+    public $timestamps = false;
 }
