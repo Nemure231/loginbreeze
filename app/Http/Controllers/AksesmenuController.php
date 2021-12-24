@@ -69,15 +69,10 @@ class AksesmenuController extends Controller
         $role_id = $request->segment(3);
         $role = Auth::user()->role_id;
 
-        if($role == 1){
-            $id_role = '';
-        }else{
-            $id_role = 1;
-        }
-
+    
         $rolenmenu= Model_menu::select('id_menu', 'nama_menu')
                     // ->where('id_menu', '>', 1)
-                    ->where('id_menu', '!=', $id_role)
+                    ->where('id_menu', '!=', 1)
                     ->get();
         $id_role =  Model_role::select('id_role')
                     ->where('id_role', $role_id)

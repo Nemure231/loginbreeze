@@ -26,27 +26,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        // $role = Auth::user()->role_id;
-       
-        // $td = Model_akses_menu::with('menu')
-        // ->where('role_id', $role)
-        // ->orderBy('akses_menu.menu_id', 'asc')
-        // ->orderBy('akses_menu.role_id', 'asc')
-        // ->get();
-        // dd($td);
-
-
-        // $role = Auth::user()->role_id;
-        // $menu = Model_menu::join('akses_menu', 'menu.id_menu', '=', 'akses_menu.menu_id')
-        //             ->where('akses_menu.role_id', $role)
-        //             ->orderBy('akses_menu.menu_id', 'asc')
-        //             ->orderBy('akses_menu.role_id', 'asc')
-        //             ->select('id_menu', 'nama_menu')
-        //             ->get();
-        //             dd($menu);
         
-        // $test = ambil_menu();
-        // dd($test);
         $akses = is_logged_in();
         if ($akses <= 0) {
             return redirect('/role');           
@@ -61,7 +41,6 @@ class BarangController extends Controller
         $merek =  Model_merek::select('id_merek', 'nama_merek')
                                 ->get();
 
-        // dd($meg);
 
         return view('barang/daftar_barang',
             ['barang' => $barang, 'merek' => $merek, 'satuan' => $satuan]
