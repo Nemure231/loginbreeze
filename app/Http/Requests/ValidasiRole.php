@@ -24,7 +24,7 @@ class ValidasiRole extends FormRequest
     public function rules()
     {
         return [
-            'nama_role' => 'required'
+            'nama_role' => 'required|unique:role'
             
         ];
     }
@@ -33,7 +33,7 @@ class ValidasiRole extends FormRequest
     public function messages(){
         return [
             'nama_role.required' => 'Harus diisi!',
-            // 'nama_role.unique' => 'Nama itu sudah ada!'
+            'nama_role.unique' => 'Nama itu sudah ada!'
         ];
     }
 }
