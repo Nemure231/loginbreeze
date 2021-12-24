@@ -31,7 +31,8 @@ use Illuminate\Http\Request;
                 $role = Auth::user()->role_id;
                 $menu = $request->segment(1);
 
-            
+                dd($menu);
+
     
                 $queryMenu= Model_menu::select('id_menu')
                             ->where('nama_menu', $menu)
