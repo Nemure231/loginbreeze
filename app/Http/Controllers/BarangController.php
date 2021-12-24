@@ -37,7 +37,7 @@ class BarangController extends Controller
         ->orderBy('akses_menu.menu_id', 'asc')
         ->orderBy('akses_menu.role_id', 'asc')
         ->get();
-        dd($td);
+        dd($td[0]['menu']['nama_menu']);
 
 
         $role = Auth::user()->role_id;
