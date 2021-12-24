@@ -10,4 +10,6 @@ class Model_satuan extends Model
     protected $table = 'satuan';
     protected $primaryKey = 'id_satuan';
     protected $fillable = ['nama_satuan'];
+    public $timestamps = false;
+
 }

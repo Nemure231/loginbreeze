@@ -90,41 +90,26 @@ class MenuController extends Controller
         $nama_baru = $request->e_nama_menu;
         $aturan_nama = 'required|unique:menu,nama_menu';
 
-         ///////////////Validasi Route Menu Unique////////////
-        //  $route_lama = $menu->route_menu;
-        //  $route_baru = $request->e_route_menu;
-        //  $aturan_route = 'required|unique:menu,route_menu';
-
-        // dd([$nama_lama, $nama_baru]);
 
         if($nama_baru == $nama_lama){
             $aturan_nama = 'required';
         }
 
 
-        // if($route_baru == $route_lama){
-        //     $aturan_route = 'required';
-        // }
-
         Validator::make($request->all(), [
             'e_nama_menu' => $aturan_nama,
-            // 'e_route_menu' => $aturan_route
         ],[
 
             'e_nama_menu.required' => 'Harus dipilih!',
             'e_nama_menu.unique' => 'Nama itu sudah ada!',
-            // 'e_route_menu.required' => 'Harus dipilih!',
-            // 'e_route_menu.unique' => 'Route itu sudah ada!'
+          
 
         ])->validate();
         
         Model_menu::where('id_menu', $menu->id_menu)
                     ->update([
-                        //yang kiri dari database //dan yang kanan dari name form input
                         'nama_menu' => $request->e_nama_menu,
-                        // 'route_menu' =>$request->e_route_menu
                     ]);
-        // dd($barang->id_barang);
                         
         return redirect('/menu')->with('pesan_menu', 'Data menu berhasil diedit!');
     }

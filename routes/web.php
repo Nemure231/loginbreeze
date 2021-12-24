@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use Illuminate\Http\Request;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SubmenuController;
 use App\Http\Controllers\AksesmenuController;
+use App\Http\Controllers\SatuanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,13 +70,11 @@ Route::delete('/menu/submenu/{submenu}', [SubmenuController::class, 'destroy']);
 Route::get('/role/role_akses/{role_akses}', [AksesmenuController::class, 'edit']);
 Route::put('/role/role_akses/ajax', [AksesmenuController::class, 'update']);
 
-// Route::get('/token', function (Request $request) {
-//     $token = $request->session()->token();
 
-//     $token = csrf_token();
-
-//     // ...
-// });
-
+////////satuan/////////////
+Route::get('/satuan', [MenuController::class, 'index'])->name('daftar_satuan');
+Route::post('/satuan', [MenuController::class, 'store']);
+Route::put('/satuan/{satuan}', [MenuController::class, 'update']);
+Route::delete('/satuan/{satuan}', [MenuController::class, 'destroy']);
 
 });
