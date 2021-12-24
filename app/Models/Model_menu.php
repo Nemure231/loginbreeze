@@ -12,11 +12,10 @@ class Model_menu extends Model
     protected $fillable = ['nama_menu'];
     public $timestamps = false;
 
-
-    // public function roles()
+    // public function akses_menu()
     // {
-    //     // return $this->belongsToMany(Role::class);
-
-    //     return $this->belongsToMany(Model_akses_menu::class, 'akses_menu', 'menu_id', 'role_id');
+    //     return $this->hasMany(Model_akses_menu::class, 'menu_id', 'id_menu');
     // }
+
+
 }
