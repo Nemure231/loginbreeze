@@ -59,6 +59,8 @@
                     {{ __('Login') }}
                 </x-button>
             </div>
+            email: test@web.com
+            pass: 12345678
         </form>
     </x-auth-card>
 </x-guest-layout>

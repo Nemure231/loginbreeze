@@ -25,7 +25,7 @@ class MerekController extends Controller
 
             'nama_merek.required' => 'Harus dipilih!',
             'nama_merek.unique' => 'Nama itu sudah ada!',
-          
+        
 
         ])->validate();
 
