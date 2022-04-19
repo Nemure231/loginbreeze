@@ -1,10 +1,4 @@
-// new TomSelect("#satuan_id",{
-// 	create: true,
-// 	sortField: {
-// 		field: "text",
-// 		direction: "asc"
-// 	}
-// });
+
 
 ///Fungsi DOM sudah siap dieksekusi via javascript murni
 function ready(fn) {
@@ -97,16 +91,11 @@ ready(function () {
   var modalEdit = document.getElementById('modal-edit');
    //fungsi mengambil file yang tersimpan di local browser
   var id_menu = localStorage.getItem("simpan_id_menu");
-  // var satuan = localStorage.getItem("simpan_satuan_id");
-  // var merek = localStorage.getItem("simpan_merek_id");
-
+ 
   ///event jika: modal pada logika  1 aktif maka ubah atribut action dengan menggambil id_barang di penyimpanan local
   modalEdit.addEventListener('shown.bs.modal', function (event) {
 
     document.getElementById('form-edit').setAttribute("action", "/menu/" + id_menu);
-
-    //document.getElementById('e_satuan_id').value = satuan;
-    // document.getElementById('e_merek_id').value = merek;
 
 
   });
@@ -129,69 +118,4 @@ ready(function () {
 });
 
 
-
-
-
-
-// //////////////////////MODAL TAILWIND///////////////////////////////
-
-// /////modal tambah/
-// var open_edit_modal = document.querySelectorAll('.modal-edit-open')
-//     for (var i = 0; i < open_edit_modal.length; i++) {
-//       open_edit_modal[i].addEventListener('click', function(event){
-//     	event.preventDefault()
-//     	toggleModal()
-//       })
-//     }
-
-//     const overlay = document.querySelector('.modal-overlay')
-//     overlay.addEventListener('click', toggleModal)
-
-//     var close_edit_modal = document.querySelectorAll('.modal-edit-close')
-//     for (var i = 0; i < close_edit_modal.length; i++) {
-//       close_edit_modal[i].addEventListener('click', toggleModal)
-//     }
-// //////modal edit
-// var open_edit_modal = document.querySelectorAll('.modal-edit-open')
-//     for (var i = 0; i < open_edit_modal.length; i++) {
-//       open_edit_modal[i].addEventListener('click', function(event){
-//     	event.preventDefault()
-//     	toggleModal()
-//       })
-//     }
-
-//     const overlay = document.querySelector('.modal-overlay')
-//     overlay.addEventListener('click', toggleModal)
-
-//     var close_edit_modal = document.querySelectorAll('.modal-edit-close')
-//     for (var i = 0; i < close_edit_modal.length; i++) {
-//       close_edit_modal[i].addEventListener('click', toggleModal)
-//     }
-
-
-//     //////////////////////seting
-//     document.onkeydown = function(evt) {
-//       evt = evt || window.event
-//       var isEscape = false
-//       if ("key" in evt) {
-//     	isEscape = (evt.key === "Escape" || evt.key === "Esc")
-//       } else {
-//     	isEscape = (evt.keyCode === 27)
-//       }
-//       if (isEscape && document.body.classList.contains('modal-active')) {
-//     	toggleModal()
-//       }
-//     };
-
-
-
-
-
-//     function toggleModal () {
-//       const body = document.querySelector('body')
-//       const modal = document.querySelector('.modal')
-//       modal.classList.toggle('opacity-0')
-//       modal.classList.toggle('pointer-events-none')
-//       body.classList.toggle('modal-active')
-//     }
 

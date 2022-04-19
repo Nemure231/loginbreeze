@@ -6,7 +6,7 @@ $classes = ($active ?? false)
             : 'parent-nav inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-semibold leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out cursor-pointer relative';
 @endphp
 
-<div x-data="{ open: false }" @click.away="open = false" @close.stop="open = false" @click="open = ! open" {{ $attributes->merge(['class' => $classes]) }} >
+<div x-data="{ open: false }" @click.away="open = false" @close.stop="open = false" @click="open =! open" {{ $attributes->merge(['class' => $classes]) }} >
     <div>
         {{ $name }}
 
@@ -17,14 +17,14 @@ $classes = ($active ?? false)
         </div>
     </div>
 
-    <div class="children border border-gray-300" 
-    x-show="open"
-    x-transition:enter="transition ease-out duration-200"
-    x-transition:enter-start="transform opacity-0 scale-95"
-    x-transition:enter-end="transform opacity-100 scale-100"
-    x-transition:leave="transition ease-in duration-75"
-    x-transition:leave-start="transform opacity-100 scale-100"
-    x-transition:leave-end="transform opacity-0 scale-95">
-        {{ $children }}
-    </div>
+        <div class="children border border-gray-300" 
+        x-show="open"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="transform opacity-0 scale-95"
+        x-transition:enter-end="transform opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75"
+        x-transition:leave-start="transform opacity-100 scale-100"
+        x-transition:leave-end="transform opacity-0 scale-95">
+            {{ $children }}
+        </div>
 </div>

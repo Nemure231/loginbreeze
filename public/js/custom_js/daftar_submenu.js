@@ -1,10 +1,3 @@
-// new TomSelect("#satuan_id",{
-// 	create: true,
-// 	sortField: {
-// 		field: "text",
-// 		direction: "asc"
-// 	}
-// });
 
 ///Fungsi DOM sudah siap dieksekusi via javascript murni
 function ready(fn) {
@@ -39,22 +32,7 @@ ready(function () {
     new bootstrap.Modal(document.getElementById('modal-tambah')).show();
 
   });
-  //////////////////Cek status submenu//////////////////
 
-  // document.getElementById('status-submenu').addEventListener('click', function () {
-
-  //   var cekStatus = this.checked;
-
-  //   if(cekStatus == true){
-  //        document.getElementById('status-submenu').value = 1;
-  //   }
-  //   if(cekStatus == false){
-  //     document.getElementById('status-submenu').value = 2;
-  //   }
-
-  // });
-
-  /////////////////EDIT///////////////////
 
 
   var tombolEdit = document.getElementsByClassName('tombol-edit');
@@ -155,14 +133,6 @@ ready(function () {
     document.getElementById('form-edit').setAttribute("action", "/menu/submenu/" + ambilIdMenu);
     document.getElementById('e-menu-id').value = ambilMenuId;
 
-    // if (ambilStatusSubmenu == 1) {
-    //   // document.getElementById('e-status-submenu').checked = true;
-    //   document.getElementById('e-status-submenu').value = 1;
-    // } else {
-    //   // document.getElementById('e-status-submenu').checked = false;
-    //   document.getElementById('e-status-submenu').value = 2;
-    // }
-
 
   });
   var validasiText = document.getElementById('hapus-validasi');
@@ -181,71 +151,3 @@ ready(function () {
 
 
 });
-
-
-
-
-
-
-// //////////////////////MODAL TAILWIND///////////////////////////////
-
-// /////modal tambah/
-// var open_edit_modal = document.querySelectorAll('.modal-edit-open')
-//     for (var i = 0; i < open_edit_modal.length; i++) {
-//       open_edit_modal[i].addEventListener('click', function(event){
-//     	event.preventDefault()
-//     	toggleModal()
-//       })
-//     }
-
-//     const overlay = document.querySelector('.modal-overlay')
-//     overlay.addEventListener('click', toggleModal)
-
-//     var close_edit_modal = document.querySelectorAll('.modal-edit-close')
-//     for (var i = 0; i < close_edit_modal.length; i++) {
-//       close_edit_modal[i].addEventListener('click', toggleModal)
-//     }
-// //////modal edit
-// var open_edit_modal = document.querySelectorAll('.modal-edit-open')
-//     for (var i = 0; i < open_edit_modal.length; i++) {
-//       open_edit_modal[i].addEventListener('click', function(event){
-//     	event.preventDefault()
-//     	toggleModal()
-//       })
-//     }
-
-//     const overlay = document.querySelector('.modal-overlay')
-//     overlay.addEventListener('click', toggleModal)
-
-//     var close_edit_modal = document.querySelectorAll('.modal-edit-close')
-//     for (var i = 0; i < close_edit_modal.length; i++) {
-//       close_edit_modal[i].addEventListener('click', toggleModal)
-//     }
-
-
-//     //////////////////////seting
-//     document.onkeydown = function(evt) {
-//       evt = evt || window.event
-//       var isEscape = false
-//       if ("key" in evt) {
-//     	isEscape = (evt.key === "Escape" || evt.key === "Esc")
-//       } else {
-//     	isEscape = (evt.keyCode === 27)
-//       }
-//       if (isEscape && document.body.classList.contains('modal-active')) {
-//     	toggleModal()
-//       }
-//     };
-
-
-
-
-
-//     function toggleModal () {
-//       const body = document.querySelector('body')
-//       const modal = document.querySelector('.modal')
-//       modal.classList.toggle('opacity-0')
-//       modal.classList.toggle('pointer-events-none')
-//       body.classList.toggle('modal-active')
-//     }
-

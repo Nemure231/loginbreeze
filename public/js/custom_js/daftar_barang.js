@@ -1,10 +1,4 @@
-// new TomSelect("#satuan_id",{
-// 	create: true,
-// 	sortField: {
-// 		field: "text",
-// 		direction: "asc"
-// 	}
-// });
+
 
 ///Fungsi DOM sudah siap dieksekusi via javascript murni
 function ready(fn) {
@@ -56,11 +50,9 @@ ready(function () {
         document.getElementById('form_edit').setAttribute("action", "/barang/" + element.dataset.id_barang);
         ///fungsi menyimpan data terakhir di local browser
         var id_barang = element.dataset.id_barang;
-        // var merek_id = element.dataset.merek_id;
-        // var satuan_id = element.dataset.satuan_id;
+      
         localStorage.setItem("simpan_id_barang", id_barang);
-        // localStorage.setItem("simpan_merek_id", merek_id);
-        // localStorage.setItem("simpan_satuan_id", satuan_id);
+
 
 
       });
@@ -107,16 +99,13 @@ ready(function () {
   var modalEdit = document.getElementById('modalEdit');
    //fungsi mengambil file yang tersimpan di local browser
   var id_barang = localStorage.getItem("simpan_id_barang");
-  // var satuan = localStorage.getItem("simpan_satuan_id");
-  // var merek = localStorage.getItem("simpan_merek_id");
+
 
   ///event jika: modal pada logika  1 aktif maka ubah atribut action dengan menggambil id_barang di penyimpanan local
   modalEdit.addEventListener('shown.bs.modal', function (event) {
 
     document.getElementById('form_edit').setAttribute("action", "/barang/" + id_barang);
 
-    //document.getElementById('e_satuan_id').value = satuan;
-    // document.getElementById('e_merek_id').value = merek;
 
 
   });
